@@ -1,0 +1,41 @@
+@keyframes rotation {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.header {
+  padding: 18px 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(7, 48, 66, 1);
+}
+
+.header__logo {
+  width: 38px;
+  height: 38px;
+  background: url(../../images/logo.png) center center no-repeat;
+  animation: rotation 10s linear infinite normal;
+}
+
+@media (max-width: 1024px) {
+  .header {
+    padding: 18px 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 18px 30px;
+  }
+}
+
+@media (max-width: 425px) {
+  .header {
+    padding: 18px 14px;
+  }
+}
