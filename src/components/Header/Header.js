@@ -5,15 +5,19 @@ import Navigation from '../Navigation/Navigation';
 
 export default function Header() {
   return (
-    <header className="header container">
-      <Link
-        className="header__logo"
-        to="/"
-      >
-      </Link>
-      <nav className='header__nav' >
-        <Navigation />
-      </nav>
+    <header className="header">
+      <div className="container">
+        <div className="header__wpapper">
+          <Link
+            className="header__logo"
+            to="/"
+          >
+          </Link>
+          <nav className='header__nav' >
+            <Navigation />
+          </nav>
+        </div>
+      </div>
     </header>
   );
 };
