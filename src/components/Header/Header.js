@@ -5,7 +5,7 @@ import Navigation from '../Navigation/Navigation';
 
 export default function Header() {
   return (
-    <header className="header">
+    <header className="header container">
       <Link
         className="header__logo"
         to="/"

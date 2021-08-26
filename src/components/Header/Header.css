@@ -8,7 +8,9 @@
 }
 
 .header {
-  padding: 18px 70px;
+  /* padding: 18px 70px; */
+  padding-top: 18px;
+  padding-bottom: 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -22,20 +24,28 @@
   animation: rotation 10s linear infinite normal;
 }
 
+.container {
+  padding-right: 70px;
+  padding-left: 70px;
+}
+
 @media (max-width: 1024px) {
   .header {
-    padding: 18px 50px;
+    padding-right: 50px;
+    padding-left: 50px;
   }
 }
 
 @media (max-width: 768px) {
   .header {
-    padding: 18px 30px;
+    padding-right: 30px;
+    padding-left: 30px;
   }
 }
 
 @media (max-width: 425px) {
   .header {
-    padding: 18px 14px;
+    padding-right: 14px;
+    padding-left: 14px;
   }
 }
