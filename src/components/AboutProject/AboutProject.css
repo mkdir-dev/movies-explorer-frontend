@@ -1,6 +1,5 @@
 .about-project {
   padding: 110px 0;
-  background-color: rgba(0, 0, 0, 1);
 }
 
 .section-title {
@@ -11,6 +10,7 @@
   font-weight: normal;
   font-size: 22px;
   line-height: 27px;
+  letter-spacing: -0.04em;
 }
 
 .about-project__text-wrap {
@@ -31,6 +31,7 @@
   font-weight: normal;
   font-size: 20px;
   line-height: 24px;
+  letter-spacing: -0.04em;
 }
 
 .about-project__text-paragraph {
