@@ -1,5 +1,7 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 import './Header.css';
-import { Link } from 'react-router-dom'
 
 import Navigation from '../Navigation/Navigation';
 
@@ -13,11 +15,11 @@ export default function Header() {
             to="/"
           >
           </Link>
-          <nav className='header__nav' >
+          <nav className="header__nav" >
             <Navigation />
           </nav>
         </div>
       </div>
     </header>
   );
-};
+}

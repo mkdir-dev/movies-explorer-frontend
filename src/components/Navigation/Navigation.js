@@ -1,10 +1,11 @@
-import './Navigation.css';
-
+import React from 'react';
 import { Link } from 'react-router-dom';
+
+import './Navigation.css';
 
 export default function Navigation() {
   return (
-    <ul className='navigation'>
+    <ul className="navigation">
       <li className="navigation__item">
         <Link
           className="navigation__link navigation__link_type_signup"
@@ -23,4 +24,4 @@ export default function Navigation() {
       </li>
     </ul>
   );
-};
+}

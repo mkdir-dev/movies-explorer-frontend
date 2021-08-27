@@ -1,6 +1,7 @@
-import './NavTab.css';
-
+import React from 'react';
 import { Link } from 'react-router-dom';
+
+import './NavTab.css';
 
 export default function NavTab() {
   return (
@@ -13,4 +14,4 @@ export default function NavTab() {
       </Link>
     </div>
   );
-};
+}
