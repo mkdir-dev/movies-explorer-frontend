@@ -103,9 +103,6 @@
   }
 }
 
-@media (max-width: 800px) {
-}
-
 @media (max-width: 640px) {
   .about-me__container {
     flex-wrap: wrap-reverse;
