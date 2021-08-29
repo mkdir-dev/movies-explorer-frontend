@@ -13,9 +13,8 @@ export default function Header() {
           <Link
             className="header__logo"
             to="/"
-          >
-          </Link>
-          <nav className="header__nav" >
+          />
+          <nav className="header__nav">
             <Navigation />
           </nav>
         </div>

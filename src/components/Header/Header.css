@@ -17,6 +17,11 @@
   height: 38px;
   background: url(../../images/logo.png) center center no-repeat;
   animation: rotation 10s linear infinite normal;
+  transition: all 0.3s ease-out;
+}
+
+.header__logo:hover {
+  opacity: 0.7;
 }
 
 .header__wpapper {

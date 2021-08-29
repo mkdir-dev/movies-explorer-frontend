@@ -16,7 +16,9 @@
 }
 
 .nav-tab__link:hover {
-  opacity: 0.7;
+  transform: scale(1.05);
+  color: rgba(61, 220, 132, 1);
+  border: 1px solid rgba(61, 220, 132, 1);
 }
 
 @media (max-width: 864px) {
