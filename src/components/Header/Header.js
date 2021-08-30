@@ -1,19 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import './Header.css';
 
+import Logotype from '../Logotype/Logotype';
 import Navigation from '../Navigation/Navigation';
 
-export default function Header() {
+// eslint-disable-next-line react/prop-types
+export default function Header({ pageLocation }) {
   return (
-    <header className="header">
+    <header className={` ${pageLocation ? 'hide-section' : 'header'} `}>
       <div className="container">
         <div className="header__wpapper">
-          <Link
-            className="header__logo"
-            to="/"
-          />
+          <Logotype />
           <nav className="header__nav">
             <Navigation />
           </nav>
