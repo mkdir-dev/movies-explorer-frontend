@@ -13,6 +13,7 @@
   font-size: 12px;
   line-height: 16px;
   transition: all 0.3s ease-out;
+  cursor: pointer;
 }
 
 .nav-tab__link:hover {

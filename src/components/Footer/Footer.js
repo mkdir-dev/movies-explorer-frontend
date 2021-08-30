@@ -6,7 +6,7 @@ export default function App() {
   return (
     <footer className="footer">
       <div className="container">
-        <p className="footer__description">Учебный проект Яндекс.Практикум х BeatFilm.</p>
+        <p className="footer__description">Учебный проект х BeatFilm.</p>
         <div className="footer__wrapper">
           <a
             href="https://github.com/mkdir-dev"
