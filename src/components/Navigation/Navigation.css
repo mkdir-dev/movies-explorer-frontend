@@ -111,6 +111,7 @@
     justify-content: flex-end;
   }
   .navigation__links-movies {
+    position: relative;
     display: none;
   }
   .navigation__link_type_profile {
@@ -123,7 +124,7 @@
     padding: 0;
     border: none;
     background-color: transparent;
-    background-image: url(../../images/burger-menu.png);
+    background: url(../../images/burger-menu.png) no-repeat;
     cursor: pointer;
     transition: all 0.3s ease-out;
   }

@@ -2,9 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './Navigation.css';
+import MenuBurger from '../MenuBurger/MenuBurger';
 
 // eslint-disable-next-line react/prop-types
 export default function Navigation({ loggedIn }) {
+  const [activedMenuBurger, setActivedMenuBurger] = React.useState(true);
+
+  const handleClick = () => {
+    setActivedMenuBurger(true);
+  };
+
   return (
     <ul className="navigation">
       <li className={`${loggedIn ? 'hide-section' : 'navigation__item'}`}>
@@ -45,7 +52,16 @@ export default function Navigation({ loggedIn }) {
         >
           Аккаунт
         </Link>
-        <button className="navigation__button-burger" type="button" aria-label="asd" />
+        <button
+          className="navigation__button-burger"
+          type="button"
+          aria-label="button-burger"
+          onClick={handleClick}
+        />
+        <MenuBurger
+          activeBurger={activedMenuBurger}
+          setActiveBurger={setActivedMenuBurger}
+        />
       </div>
     </ul>
   );
