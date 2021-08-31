@@ -12,11 +12,14 @@ import Footer from '../Footer/Footer';
 
 export default function App() {
   const location = useLocation();
-  // eslint-disable-next-line no-unused-vars
+
   const [loggedIn, setLoggedIn] = useState(false);
 
   // отображение шапки и подвала
   const [pageLocation, setPageLocation] = useState(false);
+
+  // цвет фона шапки страницы
+  const [backgroundHeader, setBackgroundHeader] = useState(false);
 
   // console.log(`1: ${pageLocation}`);
   // console.log(`2: ${setPageLocation}`);
@@ -28,12 +31,12 @@ export default function App() {
 
   // изменить стейт при регистрации - выйти
   // eslint-disable-next-line no-unused-vars
-  function signOut() {
+  const signOut = () => {
     setLoggedIn(false);
-  }
+  };
 
-  // если на этих страницах, то непоказывать шапку и подвал
   useEffect(() => {
+    // если на этих страницах, то непоказывать шапку и подвал
     if (
       location.pathname === '/movies'
       || location.pathname === '/saved-movies'
@@ -45,10 +48,28 @@ export default function App() {
     }
   }, [location]);
 
+  // если пользователь на странице с фильмами, то считать его залогиненным
+  useEffect(() => {
+    if (location.pathname === '/movies') {
+      onLogin();
+    }
+  }, [location]);
+
+  // если пользователь на главной странице, то разукрасить фон шапки
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setBackgroundHeader(true);
+    } else {
+      setBackgroundHeader(false);
+    }
+  }, [location]);
+
   return (
     <div className="page">
       <Header
         pageLocation={pageLocation}
+        loggedIn={loggedIn}
+        backgroundHeader={backgroundHeader}
       />
       <main className="content">
         <Switch>
@@ -58,7 +79,7 @@ export default function App() {
           </Route>
 
           <Route path="/signup">
-            <Register onLogin={onLogin} />
+            <Register />
           </Route>
 
           <Route path="/signin">

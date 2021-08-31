@@ -2,9 +2,11 @@ import React from 'react';
 
 import FormAuth from '../FormAuth/FormAuth';
 
-export default function Login() {
+// eslint-disable-next-line react/prop-types
+export default function Login({ onLogin }) {
   return (
     <FormAuth
+      onLogin={onLogin}
       linkHistory="/"
       title="Рады видеть!"
       buttonText="Войти"

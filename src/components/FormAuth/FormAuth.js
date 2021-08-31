@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable object-curly-newline */
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
@@ -7,11 +6,12 @@ import './FormAuth.css';
 import Logotype from '../Logotype/Logotype';
 
 export default function FormAuth({
-  children, linkHistory, title, buttonText, typeButton, question, link, linkText,
+  onLogin, children, linkHistory, title, buttonText, typeButton, question, link, linkText,
 }) {
   const history = useHistory();
 
   function handleSubmit(evt) {
+    onLogin();
     evt.preventDefault();
     history.push(`${linkHistory}`);
   }
