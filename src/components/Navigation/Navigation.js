@@ -6,7 +6,7 @@ import MenuBurger from '../MenuBurger/MenuBurger';
 
 // eslint-disable-next-line react/prop-types
 export default function Navigation({ loggedIn }) {
-  const [activedMenuBurger, setActivedMenuBurger] = React.useState(true);
+  const [activedMenuBurger, setActivedMenuBurger] = React.useState(false);
 
   const handleClick = () => {
     setActivedMenuBurger(true);

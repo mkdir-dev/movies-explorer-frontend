@@ -1,8 +1,8 @@
 .menu-burger {
-  display: none;
   opacity: 0;
   pointer-events: none;
   transition: all 0.5s ease-out;
+  transform: scale(0);
 }
 
 .menu-burger_active {
