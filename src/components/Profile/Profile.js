@@ -2,8 +2,6 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-// import FormAuth from '../FormAuth/FormAuth';
-
 // eslint-disable-next-line react/prop-types
 export default function Profile({ signOut }) {
   const history = useHistory();
