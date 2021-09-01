@@ -2,11 +2,13 @@ import React from 'react';
 
 import './Movies.css';
 
+import Preloader from '../Preloader/Preloader';
+
 export default function Movies() {
   return (
     <section className="movies">
       <div className="container">
-        <p>Тут будет страница с фильмами</p>
+        <Preloader />
       </div>
     </section>
   );
