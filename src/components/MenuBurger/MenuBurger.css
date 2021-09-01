@@ -1,4 +1,5 @@
 .menu-burger {
+  display: none;
   opacity: 0;
   pointer-events: none;
   transition: all 0.5s ease-out;
@@ -112,6 +113,12 @@
   background-size: contain;
   cursor: pointer;
   transition: all 0.3s ease-out;
+}
+
+@media (max-width: 768px) {
+  .menu-burger {
+    display: block;
+  }
 }
 
 @media (max-width: 428px) {

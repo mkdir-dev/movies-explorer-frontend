@@ -6,8 +6,10 @@ import MenuBurger from '../MenuBurger/MenuBurger';
 
 // eslint-disable-next-line react/prop-types
 export default function Navigation({ loggedIn }) {
+  // сменить состояние навигационного меню-бургер
   const [activedMenuBurger, setActivedMenuBurger] = React.useState(false);
 
+  // открыть меню при нажатии
   const handleClick = () => {
     setActivedMenuBurger(true);
   };

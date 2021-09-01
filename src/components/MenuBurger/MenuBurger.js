@@ -8,10 +8,12 @@ import { Link } from 'react-router-dom';
 import './MenuBurger.css';
 
 export default function MenuBurger({ activeBurger, setActiveBurger }) {
+  // убрать меню-бургер при нажатии
   const handleClick = () => {
     setActiveBurger(false);
   };
 
+  // убрать возможность нажатия на фон
   const handleNotClick = (evt) => {
     evt.stopPropagation();
   };
