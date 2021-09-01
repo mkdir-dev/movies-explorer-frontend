@@ -3,9 +3,9 @@ import React from 'react';
 import './Footer.css';
 
 // eslint-disable-next-line react/prop-types
-export default function Footer({ pageLocation }) {
+export default function Footer({ footerLocation }) {
   return (
-    <footer className={` ${pageLocation ? 'hide-section' : 'footer'} `}>
+    <footer className={` ${footerLocation ? 'hide-section' : 'footer'} `}>
       <div className="container">
         <p className="footer__description">Учебный проект х BeatFilm.</p>
         <div className="footer__wrapper">

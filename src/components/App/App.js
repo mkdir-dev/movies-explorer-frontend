@@ -8,6 +8,7 @@ import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
+import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';
 
 export default function App() {
@@ -16,13 +17,16 @@ export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   // отображение шапки и подвала
-  const [pageLocation, setPageLocation] = useState(false);
+  // const [pageLocation, setPageLocation] = useState(false);
+
+  // отображение header
+  const [headerLocation, setHeaderLocation] = useState(false);
+
+  // отображение  footer
+  const [footerLocation, setFooterLocation] = useState(false);
 
   // цвет фона шапки страницы
   const [backgroundHeader, setBackgroundHeader] = useState(false);
-
-  // console.log(`1: ${pageLocation}`);
-  // console.log(`2: ${setPageLocation}`);
 
   // изменить стейт при регистрации - войти
   const onLogin = () => {
@@ -30,21 +34,34 @@ export default function App() {
   };
 
   // изменить стейт при регистрации - выйти
-  // eslint-disable-next-line no-unused-vars
   const signOut = () => {
     setLoggedIn(false);
   };
 
   useEffect(() => {
-    // если на этих страницах, то непоказывать шапку и подвал
+    // если на этих страницах, то показывать header
+    if (
+      location.pathname === '/movies'
+      || location.pathname === '/saved-movies'
+      || location.pathname === '/profile'
+      || location.pathname === '/'
+    ) {
+      setHeaderLocation(false);
+    } else {
+      setHeaderLocation(true);
+    }
+  }, [location]);
+
+  useEffect(() => {
+    // если на этих страницах, то показывать footer
     if (
       location.pathname === '/movies'
       || location.pathname === '/saved-movies'
       || location.pathname === '/'
     ) {
-      setPageLocation(false);
+      setFooterLocation(false);
     } else {
-      setPageLocation(true);
+      setFooterLocation(true);
     }
   }, [location]);
 
@@ -67,7 +84,7 @@ export default function App() {
   return (
     <div className="page">
       <Header
-        pageLocation={pageLocation}
+        headerLocation={headerLocation}
         loggedIn={loggedIn}
         backgroundHeader={backgroundHeader}
       />
@@ -86,6 +103,10 @@ export default function App() {
             <Login onLogin={onLogin} />
           </Route>
 
+          <Route path="/profile">
+            <Profile signOut={signOut} />
+          </Route>
+
           <Route path="/movies">
             <Movies />
           </Route>
@@ -93,7 +114,7 @@ export default function App() {
         </Switch>
       </main>
       <Footer
-        pageLocation={pageLocation}
+        footerLocation={footerLocation}
       />
     </div>
   );

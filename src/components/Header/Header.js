@@ -6,11 +6,11 @@ import Logotype from '../Logotype/Logotype';
 import Navigation from '../Navigation/Navigation';
 
 // eslint-disable-next-line react/prop-types
-export default function Header({ pageLocation, backgroundHeader, loggedIn }) {
+export default function Header({ headerLocation, backgroundHeader, loggedIn }) {
   return (
     <header
       className={`header
-        ${pageLocation ? 'hide-section' : ''}
+        ${headerLocation ? 'hide-section' : ''}
         ${backgroundHeader ? 'header__main-page' : ''}
       `}
     >
