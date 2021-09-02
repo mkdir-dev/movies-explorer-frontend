@@ -82,6 +82,13 @@ export default function App() {
     }
   }, [location]);
 
+  // делаем чекбокс
+  const [value, setValue] = useState(false);
+
+  const handleToggle = () => {
+    setValue(!value);
+  };
+
   return (
     <div className="page">
       <Header
@@ -109,7 +116,10 @@ export default function App() {
           </Route>
 
           <Route path="/movies">
-            <Movies />
+            <Movies
+              isOn={value}
+              handleToggle={handleToggle}
+            />
           </Route>
 
           <Route path="/not-found">
