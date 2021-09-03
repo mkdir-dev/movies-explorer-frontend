@@ -68,14 +68,14 @@ export default function Profile({ signOut }) {
             className="auth-form__link auth-form__link_edit"
             to="/"
           >
-            linkText
+            Редактировать
           </Link>
           <Link
             className="auth-form__link auth-form__link_signout"
             onClick={handleSubmit}
             to="/"
           >
-            linkText
+            Выйти из аккаунта
           </Link>
 
         </form>

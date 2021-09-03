@@ -20,7 +20,7 @@ export default function Checkbox({ isOn, handleToggle }) {
           htmlFor="checkbox"
         >
           <span
-            className="checkbox__burron"
+            className="checkbox__button"
             style={{ background: isOn && 'rgba(61, 220, 132, 1)' }}
           />
         </label>
