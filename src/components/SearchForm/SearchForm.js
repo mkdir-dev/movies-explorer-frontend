@@ -6,18 +6,12 @@ import searchIcon from '../../images/search.png';
 
 import Checkbox from '../Checkbox/Checkbox';
 
-export default function SearchForm(
-  {
-    checkboxOn,
-    handleToggleCheckbox,
-    handlePreloader,
-  },
-) {
+export default function SearchForm({ checkboxOn, handleToggleCheckbox, handlePreloader }) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     handlePreloader();
   };
-  // onSubmit={handleSubmit}
+
   return (
     <section className="search-form">
       <div className="search-form__wrapper">

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 
@@ -37,10 +38,3 @@ export default function Movies({ checkboxOn, handleToggleCheckbox }) {
     </section>
   );
 }
-
-/*
-MoviesCardList — компонент, который управляет отрисовкой
-карточек фильмов на страницу и их количеством.
-
-MoviesCard — компонент одной карточки фильма.
-*/

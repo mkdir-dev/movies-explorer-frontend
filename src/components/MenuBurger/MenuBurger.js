@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -19,7 +18,10 @@ export default function MenuBurger({ activeBurger, setActiveBurger }) {
   };
 
   return (
-    <nav className={activeBurger ? 'menu-burger_active' : 'menu-burger'} onClick={handleClick}>
+    <nav
+      className={activeBurger ? 'menu-burger_active' : 'menu-burger'}
+      onClick={handleClick}
+    >
       <ul
         className="menu-burger__list"
         onClick={handleNotClick}
@@ -72,5 +74,3 @@ export default function MenuBurger({ activeBurger, setActiveBurger }) {
     </nav>
   );
 }
-
-// "menu-burger"

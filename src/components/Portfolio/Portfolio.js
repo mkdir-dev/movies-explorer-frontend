@@ -15,7 +15,7 @@ export default function Portfolio() {
             <li className="portfolio__projects-item">
               <a
                 className="portfolio__link"
-                href="https://github.com/mkdir-dev/how-to-learn"
+                href="https://mkdir-dev.github.io/how-to-learn/"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -26,7 +26,7 @@ export default function Portfolio() {
             <li className="portfolio__projects-item">
               <a
                 className="portfolio__link"
-                href="https://github.com/mkdir-dev/russian-travel"
+                href="https://mkdir-dev.github.io/russian-travel/"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -37,7 +37,7 @@ export default function Portfolio() {
             <li className="portfolio__projects-item">
               <a
                 className="portfolio__link"
-                href="https://github.com/mkdir-dev/react-mesto-api-full"
+                href="https://mkdir-dev.github.io/mesto/"
                 target="_blank"
                 rel="noreferrer"
               >

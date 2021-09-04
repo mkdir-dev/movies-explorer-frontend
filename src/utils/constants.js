@@ -6,6 +6,7 @@ import image04 from '../images/films/04.png';
 import image05 from '../images/films/05.png';
 import image06 from '../images/films/06.png';
 import image07 from '../images/films/07.png';
+/*
 import image08 from '../images/films/08.png';
 import image09 from '../images/films/09.png';
 import image10 from '../images/films/10.png';
@@ -15,7 +16,11 @@ import image13 from '../images/films/13.png';
 import image14 from '../images/films/14.png';
 import image15 from '../images/films/15.png';
 import image16 from '../images/films/16.png';
+*/
+// скрыть ненужные карточки
+// пока не реализовал отображение по размеру экрана
 
+// все фильмы
 export const infoMovies = [
   {
     title: '33 слова о дизайне',
@@ -52,6 +57,7 @@ export const infoMovies = [
     time: '1ч 42м',
     image: image07,
   },
+  /*
   {
     title: 'Gimme Danger: История Игги и The Stooges',
     time: '1ч 42м',
@@ -97,8 +103,10 @@ export const infoMovies = [
     time: '1ч 42м',
     image: image16,
   },
+  */
 ];
 
+// сохраненные фильмы
 export const infoMoviesLiked = [
   {
     title: '33 слова о дизайне',

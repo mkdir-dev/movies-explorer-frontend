@@ -1,8 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 
-import '../Movies/Movies';
-
 import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';

@@ -42,7 +42,7 @@
 
 .about-me__social-links {
   margin: 0;
-  padding: 0;
+  padding: 40px 0 0;
   display: flex;
   list-style-type: none;
 }
@@ -107,9 +107,6 @@
   .about-me__container {
     flex-wrap: wrap-reverse;
     justify-content: center;
-  }
-  .about-me__social-links {
-    margin-top: 40px;
   }
   .about-me__photo {
     margin: 0 0 40px;

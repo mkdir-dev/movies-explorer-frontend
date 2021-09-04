@@ -73,7 +73,7 @@ export default function AboutMe() {
               </li>
             </ul>
           </article>
-          <img src={photo} alt="" className="about-me__photo" />
+          <img src={photo} alt="Фото" className="about-me__photo" />
         </div>
       </div>
     </section>

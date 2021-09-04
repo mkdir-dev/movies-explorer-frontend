@@ -31,11 +31,3 @@ export default function Header({ headerLocation, backgroundHeader, loggedIn }) {
     </header>
   );
 }
-
-// {`header ${isMain ? 'header_page-main' : ''} ${headerEnabled ? 'header_enabled' : ''}`}
-
-// ${loggedIn ? 'header__nav' : 'header__nav header__nav_width'}
-
-// {`${loggedIn ? '.header__wpapper_loggedIn' : ''}`}
-
-// <div className="header__wpapper">
