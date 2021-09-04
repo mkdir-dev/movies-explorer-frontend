@@ -11,6 +11,11 @@ export default function Profile({ signOut }) {
     evt.preventDefault();
     history.push('/');
   }
+
+  function handleSubmitError() {
+    console.log('Не получилось редактировать профиль. Попробуйте позже');
+  }
+
   return (
     <section className="auth-form">
       <div className="auth-form__container auth-form__container_type_profile">
@@ -66,7 +71,8 @@ export default function Profile({ signOut }) {
 
           <Link
             className="auth-form__link auth-form__link_edit"
-            to="/"
+            onClick={handleSubmitError}
+            to="/profile"
           >
             Редактировать
           </Link>

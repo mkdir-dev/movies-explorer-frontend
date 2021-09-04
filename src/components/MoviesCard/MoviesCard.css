@@ -15,9 +15,6 @@
   justify-content: space-between;
 }
 
-.movies-card__info {
-}
-
 .movies-card__title {
   margin: 0;
   font-style: normal;
@@ -57,6 +54,22 @@
 
 .movies-card__like:active {
   background-image: url(../../images/like_active-min.png);
+}
+
+.movies-card__delete {
+  width: 14px;
+  height: 12px;
+  border: none;
+  background-image: url(../../images/delete.png);
+  background-color: transparent;
+  background-size: contain;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+
+.movies-card__delete:active {
+  transform: scale(1.25);
+  background-image: url(../../images/delete.png);
 }
 
 .movies-card__image-cantainer {

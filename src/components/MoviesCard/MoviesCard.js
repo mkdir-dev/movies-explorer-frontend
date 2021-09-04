@@ -3,11 +3,15 @@ import React, { useState } from 'react';
 
 import './MoviesCard.css';
 
-export default function MoviesCard({ card }) {
+export default function MoviesCard({ card, deleteMoviesCard }) {
   const [isLiked, setIsLiked] = useState(false);
 
   function handleLikeClick() {
     setIsLiked(!isLiked);
+  }
+
+  function handleDeleteMovie() {
+    console.log('Не получилось удалить фильм. Попробуйте позже');
   }
 
   return (
@@ -18,10 +22,14 @@ export default function MoviesCard({ card }) {
           <p className="movies-card__time">{card.time}</p>
         </div>
         <button
-          className={`movies-card__like ${isLiked && 'movies-card__like_active'}`}
+          className={`
+          movies-card__like
+          ${isLiked && 'movies-card__like_active'}
+          ${deleteMoviesCard && 'movies-card__delete'}
+          `}
           type="button"
           aria-label="Лайк"
-          onClick={handleLikeClick}
+          onClick={deleteMoviesCard ? handleDeleteMovie : handleLikeClick}
         />
       </div>
       <div className="movies-card__image-cantainer">

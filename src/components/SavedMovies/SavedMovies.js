@@ -5,9 +5,10 @@ import '../Movies/Movies';
 
 import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
-// <Preloader />
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import { infoMoviesLiked } from '../../utils/constants';
 
-export default function Movies({ checkboxOn, handleToggleCheckbox }) {
+export default function Movies({ checkboxOn, handleToggleCheckbox, deleteMoviesCard }) {
   const [isPreloader, setPreloader] = useState(false);
 
   // сделать показ прелоадера при нажатии на кнопку поиска
@@ -28,11 +29,11 @@ export default function Movies({ checkboxOn, handleToggleCheckbox }) {
         {isPreloader ? (
           <Preloader />
         ) : (
-          <>
-            <p>Сохраненных фильмов пока нет</p>
-          </>
+          <MoviesCardList
+            movieCards={infoMoviesLiked}
+            deleteMoviesCard={deleteMoviesCard}
+          />
         )}
-
       </div>
     </section>
   );

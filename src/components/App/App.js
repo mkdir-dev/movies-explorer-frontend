@@ -17,19 +17,14 @@ export default function App() {
   const location = useLocation();
 
   const [loggedIn, setLoggedIn] = useState(false);
-
-  // отображение шапки и подвала
-  // const [pageLocation, setPageLocation] = useState(false);
-
   // отображение header
   const [headerLocation, setHeaderLocation] = useState(false);
-
   // отображение  footer
   const [footerLocation, setFooterLocation] = useState(false);
-
   // цвет фона шапки страницы
   const [backgroundHeader, setBackgroundHeader] = useState(false);
-
+  // разрешить пользователю удалять карточки после сохранения
+  const [isDeleteMoviesCard, setDeleteMoviesCard] = useState(false);
   // изменить стейт при регистрации - войти
   const onLogin = () => {
     setLoggedIn(true);
@@ -69,8 +64,18 @@ export default function App() {
 
   // если пользователь на странице с фильмами, то считать его залогиненным
   useEffect(() => {
-    if (location.pathname === '/movies') {
+    if (location.pathname === '/movies'
+      || location.pathname === '/saved-movies') {
       onLogin();
+    }
+  }, [location]);
+
+  // если пользователь на странице сохраненных фильмов, то может их удалить
+  useEffect(() => {
+    if (location.pathname === '/saved-movies') {
+      setDeleteMoviesCard(true);
+    } else {
+      setDeleteMoviesCard(false);
     }
   }, [location]);
 
@@ -89,7 +94,7 @@ export default function App() {
   const handleToggleCheckbox = () => {
     setCheckboxValue(!checkboxValue);
   };
-  // handleToggle
+
   return (
     <div className="page">
       <Header
@@ -127,6 +132,7 @@ export default function App() {
             <SavedMovies
               checkboxOn={checkboxValue}
               handleToggleCheckbox={handleToggleCheckbox}
+              deleteMoviesCard={isDeleteMoviesCard}
             />
           </Route>
 

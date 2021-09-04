@@ -98,3 +98,21 @@ export const infoMovies = [
     image: image16,
   },
 ];
+
+export const infoMoviesLiked = [
+  {
+    title: '33 слова о дизайне',
+    time: '1ч 42м',
+    image: image01,
+  },
+  {
+    title: 'Киноальманах «100 лет дизайна»',
+    time: '1ч 42м',
+    image: image02,
+  },
+  {
+    title: 'В погоне за Бенкси',
+    time: '1ч 42м',
+    image: image03,
+  },
+];
