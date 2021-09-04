@@ -6,6 +6,7 @@ import './App.css';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
+import SavedMovies from '../SavedMovies/SavedMovies';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
@@ -83,12 +84,12 @@ export default function App() {
   }, [location]);
 
   // делаем чекбокс
-  const [value, setValue] = useState(false);
+  const [checkboxValue, setCheckboxValue] = useState(false);
 
-  const handleToggle = () => {
-    setValue(!value);
+  const handleToggleCheckbox = () => {
+    setCheckboxValue(!checkboxValue);
   };
-
+  // handleToggle
   return (
     <div className="page">
       <Header
@@ -117,8 +118,15 @@ export default function App() {
 
           <Route path="/movies">
             <Movies
-              isOn={value}
-              handleToggle={handleToggle}
+              checkboxOn={checkboxValue}
+              handleToggleCheckbox={handleToggleCheckbox}
+            />
+          </Route>
+
+          <Route path="/saved-movies">
+            <SavedMovies
+              checkboxOn={checkboxValue}
+              handleToggleCheckbox={handleToggleCheckbox}
             />
           </Route>
 

@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 
-import './Movies.css';
+import '../Movies/Movies';
 
 import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import { infoMovies } from '../../utils/constants';
+// <Preloader />
 
 export default function Movies({ checkboxOn, handleToggleCheckbox }) {
   const [isPreloader, setPreloader] = useState(false);
@@ -29,18 +28,12 @@ export default function Movies({ checkboxOn, handleToggleCheckbox }) {
         {isPreloader ? (
           <Preloader />
         ) : (
-          <MoviesCardList
-            movieCards={infoMovies}
-          />
+          <>
+            <p>Сохраненных фильмов пока нет</p>
+          </>
         )}
+
       </div>
     </section>
   );
 }
-
-/*
-MoviesCardList — компонент, который управляет отрисовкой
-карточек фильмов на страницу и их количеством.
-
-MoviesCard — компонент одной карточки фильма.
-*/

@@ -4,13 +4,13 @@ import React from 'react';
 import './Checkbox.css';
 
 // eslint-disable-next-line react/prop-types
-export default function Checkbox({ isOn, handleToggle }) {
+export default function Checkbox({ checkboxOn, handleToggleCheckbox }) {
   return (
     <div className="checkbox">
       <div className="checkbox__wrapper">
         <input
-          checked={isOn}
-          onChange={handleToggle}
+          checked={checkboxOn}
+          onChange={handleToggleCheckbox}
           className="checkbox__input"
           id="checkbox"
           type="checkbox"
@@ -21,7 +21,7 @@ export default function Checkbox({ isOn, handleToggle }) {
         >
           <span
             className="checkbox__button"
-            style={{ background: isOn && 'rgba(61, 220, 132, 1)' }}
+            style={{ background: checkboxOn && 'rgba(61, 220, 132, 1)' }}
           />
         </label>
       </div>

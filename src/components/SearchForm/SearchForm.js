@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 
 import './SearchForm.css';
@@ -5,8 +6,18 @@ import searchIcon from '../../images/search.png';
 
 import Checkbox from '../Checkbox/Checkbox';
 
-// eslint-disable-next-line react/prop-types
-export default function SearchForm({ isOn, handleToggle }) {
+export default function SearchForm(
+  {
+    checkboxOn,
+    handleToggleCheckbox,
+    handlePreloader,
+  },
+) {
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    handlePreloader();
+  };
+  // onSubmit={handleSubmit}
   return (
     <section className="search-form">
       <div className="search-form__wrapper">
@@ -23,11 +34,12 @@ export default function SearchForm({ isOn, handleToggle }) {
             aria-label="Найти"
             className="search-form__search-button"
             type="submit"
+            onClick={handleSubmit}
           />
         </div>
         <Checkbox
-          isOn={isOn}
-          handleToggle={handleToggle}
+          checkboxOn={checkboxOn}
+          handleToggleCheckbox={handleToggleCheckbox}
         />
       </div>
     </section>

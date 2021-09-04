@@ -1,0 +1,19 @@
+.movies-card-list {
+}
+
+.movies-card-list__container {
+  width: 100%;
+  margin: 70px 0 10px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  list-style-type: none;
+}
+
+@media (max-width: 640px) {
+  .movies-card-list__container {
+    margin: 40px 0 20px;
+    align-items: center;
+  }
+}
