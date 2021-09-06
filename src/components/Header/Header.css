@@ -1,0 +1,30 @@
+@keyframes rotation {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.header {
+  padding: 18px 0;
+}
+
+.header__nav_width {
+  width: 100%;
+}
+
+.header__wpapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__main-page {
+  background-color: rgba(7, 48, 66, 1);
+}
+
+.header__wpapper_loggedIn {
+  justify-content: start;
+}
