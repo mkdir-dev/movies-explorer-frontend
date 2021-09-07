@@ -1,3 +1,4 @@
+/* eslint-disable promise/always-return */
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
 
@@ -13,7 +14,17 @@ import Profile from '../Profile/Profile';
 import NotFound from '../NotFound/NotFound';
 import Footer from '../Footer/Footer';
 
+// import * as MoviesApi from '../../utils/MoviesApi';
+
 export default function App() {
+  //  const [isMovies, setMovies] = useState([]);
+  /*
+    MoviesApi.getMovies()
+      .then((movies) => {
+        setMovies(movies);
+      })
+      .catch(() => setMovies([]));
+  */
   const location = useLocation();
 
   const [loggedIn, setLoggedIn] = useState(false);

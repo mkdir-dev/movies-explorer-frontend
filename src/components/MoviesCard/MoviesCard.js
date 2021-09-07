@@ -18,8 +18,8 @@ export default function MoviesCard({ card, deleteMoviesCard }) {
     <li className="movies-card">
       <div className="movies-card__wrapper">
         <div className="movies-card__info">
-          <h3 className="movies-card__title">{card.title}</h3>
-          <p className="movies-card__time">{card.time}</p>
+          <h3 className="movies-card__title">{card.nameRU}</h3>
+          <p className="movies-card__time">{card.duration}</p>
         </div>
         <button
           className={`
@@ -36,7 +36,7 @@ export default function MoviesCard({ card, deleteMoviesCard }) {
         <img
           className="movies-card__image"
           src={card.image}
-          alt={card.title}
+          alt={card.nameRU}
         />
       </div>
     </li>

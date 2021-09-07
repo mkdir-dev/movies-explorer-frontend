@@ -9,7 +9,7 @@ import Preloader from '../Preloader/Preloader';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { infoMovies } from '../../utils/constants';
 
-export default function Movies({ checkboxOn, handleToggleCheckbox }) {
+export default function Movies({ checkboxOn, handleToggleCheckbox /* , movies */ }) {
   const [isPreloader, setPreloader] = useState(false);
 
   // сделать показ прелоадера при нажатии на кнопку поиска
