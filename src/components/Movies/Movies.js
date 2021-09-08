@@ -16,13 +16,6 @@ export default function Movies({ checkboxOn, handleToggleCheckbox }) {
   const [isPreloader, setPreloader] = useState(false);
   const [allMovies, setAllMovies] = useState([]);
 
-  // сделать показ прелоадера при нажатии на кнопку поиска
-  const handlePreloader = () => {
-    setPreloader(!isPreloader);
-
-    setTimeout(() => setPreloader(false), 2000);
-  };
-
   // загрузить все карточки с фильмами BeatfilmMoviesApi
   const loadMoviesApi = () => {
     MoviesApi.getMovies()
@@ -34,7 +27,13 @@ export default function Movies({ checkboxOn, handleToggleCheckbox }) {
       });
   };
 
-  loadMoviesApi();
+  // сделать показ прелоадера при нажатии на кнопку поиска
+  const handlePreloader = () => {
+    setPreloader(!isPreloader);
+
+    setTimeout(() => setPreloader(false), 2000);
+    loadMoviesApi();
+  };
 
   return (
     <section className="movies">
