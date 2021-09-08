@@ -6,6 +6,22 @@ import './MoviesCard.css';
 export default function MoviesCard({ card, deleteMoviesCard }) {
   const [isLiked, setIsLiked] = useState(false);
 
+  /*
+    const movie = {
+      country: card.country,
+      director: card.director,
+      duration: card.duration,
+      year: card.year,
+      description: card.description,
+      image: `https://api.nomoreparties.co${card.image?.url}`,
+      trailer: card?.trailerLink,
+      nameRU: card.nameRU,
+      nameEN: card.nameEN,
+      thumbnail: `https://api.nomoreparties.co${card.image?.url}`,
+      movieId: card.id,
+    };
+    */
+
   function handleLikeClick() {
     setIsLiked(!isLiked);
   }
@@ -19,7 +35,7 @@ export default function MoviesCard({ card, deleteMoviesCard }) {
       <div className="movies-card__wrapper">
         <div className="movies-card__info">
           <h3 className="movies-card__title">{card.nameRU}</h3>
-          <p className="movies-card__time">{card.duration}</p>
+          <p className="movies-card__time">{`${Math.trunc(card.duration / 60)}ч ${card.duration % 60}м`}</p>
         </div>
         <button
           className={`
@@ -32,12 +48,19 @@ export default function MoviesCard({ card, deleteMoviesCard }) {
           onClick={deleteMoviesCard ? handleDeleteMovie : handleLikeClick}
         />
       </div>
-      <div className="movies-card__image-cantainer">
-        <img
-          className="movies-card__image"
-          src={card.image}
-          alt={card.nameRU}
-        />
+      <div className="movies-card__image-container">
+        <a
+          className="movies-card__link"
+          href={card.trailerLink}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img
+            className="movies-card__image"
+            src={`https://api.nomoreparties.co${card.image.url}`}
+            alt={card.nameRU}
+          />
+        </a>
       </div>
     </li>
   );

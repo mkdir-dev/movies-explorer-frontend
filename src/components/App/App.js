@@ -17,25 +17,15 @@ import Footer from '../Footer/Footer';
 // import * as MoviesApi from '../../utils/MoviesApi';
 
 export default function App() {
-  //  const [isMovies, setMovies] = useState([]);
-  /*
-    MoviesApi.getMovies()
-      .then((movies) => {
-        setMovies(movies);
-      })
-      .catch(() => setMovies([]));
-  */
   const location = useLocation();
 
   const [loggedIn, setLoggedIn] = useState(false);
-  // отображение header
-  const [headerLocation, setHeaderLocation] = useState(false);
-  // отображение  footer
-  const [footerLocation, setFooterLocation] = useState(false);
-  // цвет фона шапки страницы
-  const [backgroundHeader, setBackgroundHeader] = useState(false);
+  const [headerLocation, setHeaderLocation] = useState(false); // отображение header
+  const [footerLocation, setFooterLocation] = useState(false); // отображение  footer
+  const [backgroundHeader, setBackgroundHeader] = useState(false); // цвет фона шапки страницы
   // разрешить пользователю удалять карточки после сохранения
   const [isDeleteMoviesCard, setDeleteMoviesCard] = useState(false);
+
   // изменить стейт при регистрации - войти
   const onLogin = () => {
     setLoggedIn(true);
@@ -44,6 +34,13 @@ export default function App() {
   // изменить стейт при регистрации - выйти
   const signOut = () => {
     setLoggedIn(false);
+  };
+
+  // делаем чекбокс
+  const [checkboxValue, setCheckboxValue] = useState(false);
+
+  const handleToggleCheckbox = () => {
+    setCheckboxValue(!checkboxValue);
   };
 
   useEffect(() => {
@@ -58,9 +55,7 @@ export default function App() {
     } else {
       setHeaderLocation(true);
     }
-  }, [location]);
 
-  useEffect(() => {
     // если на этих страницах, то показывать footer
     if (
       location.pathname === '/movies'
@@ -71,40 +66,27 @@ export default function App() {
     } else {
       setFooterLocation(true);
     }
-  }, [location]);
 
-  // если пользователь на странице с фильмами, то считать его залогиненным
-  useEffect(() => {
+    // если пользователь на странице с фильмами, то считать его залогиненным
     if (location.pathname === '/movies'
       || location.pathname === '/saved-movies') {
       onLogin();
     }
-  }, [location]);
 
-  // если пользователь на странице сохраненных фильмов, то может их удалить
-  useEffect(() => {
+    // если пользователь на странице сохраненных фильмов, то может их удалить
     if (location.pathname === '/saved-movies') {
       setDeleteMoviesCard(true);
     } else {
       setDeleteMoviesCard(false);
     }
-  }, [location]);
 
-  // если пользователь на главной странице, то разукрасить фон шапки
-  useEffect(() => {
+    // если пользователь на главной странице, то разукрасить фон шапки
     if (location.pathname === '/') {
       setBackgroundHeader(true);
     } else {
       setBackgroundHeader(false);
     }
   }, [location]);
-
-  // делаем чекбокс
-  const [checkboxValue, setCheckboxValue] = useState(false);
-
-  const handleToggleCheckbox = () => {
-    setCheckboxValue(!checkboxValue);
-  };
 
   return (
     <div className="page">

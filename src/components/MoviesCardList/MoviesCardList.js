@@ -24,10 +24,10 @@ export default function MoviesCardList({ movieCards, deleteMoviesCard }) {
 
     if (windowWidth <= 640) {
       setMoviesCount(5);
-      setAddMoviesCount(2);
+      setAddMoviesCount(5);
     } else {
       setMoviesCount(7);
-      setAddMoviesCount(3);
+      setAddMoviesCount(7);
     }
 
     return () => window.removeEventListener('resize', callbackWidth);
