@@ -16,14 +16,22 @@ export default function SearchForm({ checkboxOn, handleToggleCheckbox, handlePre
     <section className="search-form">
       <div className="search-form__wrapper">
         <div className="search-form__container">
-          <img src={searchIcon} className="search-form__icon" alt="Поиск" />
+          <img
+            src={searchIcon}
+            className="search-form__icon"
+            alt="Поиск"
+          />
           <input
             className="search-form__input"
             type="text"
             placeholder="Фильм"
-            minLength="1"
             required
           />
+          <span
+            className="search-form__err search-form__err_hide"
+          >
+            Нужно ввести ключевое слово
+          </span>
           <button
             aria-label="Найти"
             className="search-form__search-button"

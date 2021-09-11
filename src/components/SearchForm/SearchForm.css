@@ -11,6 +11,7 @@
 }
 
 .search-form__container {
+  position: relative;
   width: 100%;
   padding: 9px;
   display: flex;
@@ -36,6 +37,22 @@
   font-weight: normal;
   font-size: 18px;
   line-height: 20px;
+}
+
+.search-form__err {
+  position: absolute;
+  left: 32%;
+  width: 100%;
+  display: flex;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: rgb(238, 52, 101);
+}
+
+.search-form__err_hide {
+  display: none;
 }
 
 .search-form__search-button {
