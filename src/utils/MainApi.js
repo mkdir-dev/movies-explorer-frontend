@@ -1,5 +1,5 @@
 /* eslint-disable prefer-promise-reject-errors */
-export const BASE_URL = 'api.mesto-mkdirdev.nomoredomains.rocks';
+export const BASE_URL = 'https://api.mesto-mkdirdev.nomoredomains.rocks';
 
 const headers = {
   Accept: 'application/json',

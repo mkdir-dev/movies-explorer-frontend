@@ -4,6 +4,7 @@
 }
 
 .search-form__wrapper {
+  position: relative;
   padding: 70px 0 80px;
   display: flex;
   flex-direction: row;
@@ -11,7 +12,6 @@
 }
 
 .search-form__container {
-  position: relative;
   width: 100%;
   padding: 9px;
   display: flex;
@@ -41,9 +41,10 @@
 
 .search-form__err {
   position: absolute;
-  left: 32%;
+  top: 55px;
   width: 100%;
   display: flex;
+  justify-content: center;
   font-style: normal;
   font-weight: normal;
   font-size: 10px;

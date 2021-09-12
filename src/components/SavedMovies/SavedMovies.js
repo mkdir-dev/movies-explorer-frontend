@@ -7,13 +7,13 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { infoMoviesLiked } from '../../utils/constants';
 
 export default function Movies({ checkboxOn, handleToggleCheckbox, deleteMoviesCard }) {
-  const [isPreloader, setPreloader] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   // сделать показ прелоадера при нажатии на кнопку поиска
   const handlePreloader = () => {
-    setPreloader(!isPreloader);
+    setLoading(!isLoading);
 
-    setTimeout(() => setPreloader(false), 2000);
+    setTimeout(() => setLoading(false), 2000);
   };
 
   return (
@@ -24,7 +24,7 @@ export default function Movies({ checkboxOn, handleToggleCheckbox, deleteMoviesC
           handleToggleCheckbox={handleToggleCheckbox}
           handlePreloader={handlePreloader}
         />
-        {isPreloader ? (
+        {isLoading ? (
           <Preloader />
         ) : (
           <MoviesCardList

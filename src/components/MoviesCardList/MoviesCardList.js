@@ -16,9 +16,9 @@ export default function MoviesCardList({ movieCards, deleteMoviesCard }) {
   }
 
   useEffect(() => {
-    function callbackWidth() {
+    const callbackWidth = () => {
       setDisplayWidth(windowWidth);
-    }
+    };
 
     window.addEventListener('resize', callbackWidth);
 

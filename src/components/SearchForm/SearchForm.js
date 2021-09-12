@@ -6,9 +6,10 @@ import searchIcon from '../../images/search.png';
 
 import Checkbox from '../Checkbox/Checkbox';
 
-export default function SearchForm({ checkboxOn, handleToggleCheckbox, handlePreloader }) {
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
+export default function SearchForm({
+  checkboxOn, handleToggleCheckbox, handlePreloader, onChangeSearchValue, isSearchValidity,
+}) {
+  const handleSubmit = () => {
     handlePreloader();
   };
 
@@ -25,10 +26,12 @@ export default function SearchForm({ checkboxOn, handleToggleCheckbox, handlePre
             className="search-form__input"
             type="text"
             placeholder="Фильм"
+            onChange={onChangeSearchValue}
             required
           />
           <span
-            className="search-form__err search-form__err_hide"
+            className={`search-form__err
+              ${isSearchValidity ? 'search-form__err_hide' : ''}`}
           >
             Нужно ввести ключевое слово
           </span>

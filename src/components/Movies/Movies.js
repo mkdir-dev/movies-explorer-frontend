@@ -13,7 +13,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import * as MoviesApi from '../../utils/MoviesApi';
 
 export default function Movies({ checkboxOn, handleToggleCheckbox }) {
-  const [isPreloader, setPreloader] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const [allMovies, setAllMovies] = useState([]);
 
   // загрузить все карточки с фильмами BeatfilmMoviesApi
@@ -29,11 +29,30 @@ export default function Movies({ checkboxOn, handleToggleCheckbox }) {
 
   // сделать показ прелоадера при нажатии на кнопку поиска
   const handlePreloader = () => {
-    setPreloader(!isPreloader);
+    setLoading(!isLoading);
 
-    setTimeout(() => setPreloader(false), 2000);
+    setTimeout(() => setLoading(false), 500);
     loadMoviesApi();
   };
+
+  // стейт значения в строке поиска
+  const [searchValue, setSearchValue] = useState('');
+  const [isSearchValidity, setSearchValidity] = useState(false);
+  // записать значение в строке поиска
+  // и проверить на валидность
+  const handleChangeSearchValue = (evt) => {
+    if (!evt.target.validity) {
+      setSearchValidity(false);
+    } else {
+      setSearchValidity(true);
+    }
+
+    setSearchValue(evt.target.value);
+  };
+
+  // отфильтровать фильмы по значению в поиске
+  const filteredMovies = allMovies.filter((movie) => movie.nameRU.toLowerCase()
+    .includes(searchValue.toLowerCase()));
 
   return (
     <section className="movies">
@@ -42,12 +61,14 @@ export default function Movies({ checkboxOn, handleToggleCheckbox }) {
           checkboxOn={checkboxOn}
           handleToggleCheckbox={handleToggleCheckbox}
           handlePreloader={handlePreloader}
+          onChangeSearchValue={handleChangeSearchValue}
+          isSearchValidity={isSearchValidity}
         />
-        {isPreloader ? (
+        {isLoading ? (
           <Preloader />
         ) : (
           <MoviesCardList
-            movieCards={allMovies}
+            movieCards={filteredMovies}
           />
         )}
       </div>
