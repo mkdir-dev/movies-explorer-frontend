@@ -44,11 +44,23 @@ export default function App() {
 
   // eslint-disable-next-line no-shadow
   const handleFilteredMovies = (movies, keyword) => {
-    const filteredMovies = movies
+    // фильтрация фильмов по ключевому слову
+    const filteredMoviesByKeyword = movies
       .filter((movie) => movie.nameRU.toLowerCase().includes(keyword.toLowerCase())
         || (movie.nameEN ? movie.nameEN : '').toLowerCase().includes(keyword.toLowerCase()));
 
-    return filteredMovies;
+    // фильтрация фильмов по чекбоксу короткометражки
+    const filteredMoviesByCheckbox = filteredMoviesByKeyword.filter(
+      (movie) => movie.duration < 40,
+    );
+
+    // если стоит чекбокс короткометражки
+    if (checkboxValue) {
+      // вернуть короткометражки
+      return filteredMoviesByCheckbox;
+    }
+    // иначе вернуть все фильмы по ключевому слову
+    return filteredMoviesByKeyword;
   };
 
   const handleSearchMovies = (keyword) => {
