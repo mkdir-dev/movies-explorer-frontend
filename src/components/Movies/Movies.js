@@ -17,54 +17,9 @@ export default function Movies({
   isLoading,
   movies,
   onSearchMoviesByValue,
+  isNotFound,
+  isErrorServer,
 }) {
-  // перенести стейт лоадера в корневой файл т.к. нужен будет в savedMovies
-  // const [isLoading, setLoading] = useState(false);
-  // const [allMovies, setAllMovies] = useState([]);
-
-  // загрузить все карточки с фильмами BeatfilmMoviesApi
-  /*
-  const loadMoviesApi = () => {
-    MoviesApi.getMovies()
-      .then((movies) => {
-        setAllMovies(movies);
-      })
-      .catch(() => {
-        setAllMovies([]);
-      });
-  };
-*/
-  // сделать показ прелоадера при нажатии на кнопку поиска
-  /*
-  const handlePreloader = () => {
-    setLoading(!isLoading);
-
-    setTimeout(() => setLoading(false), 500);
-    loadMoviesApi();
-  };
-  */
-  /*
-    // стейт значения в строке поиска
-    const [searchValue, setSearchValue] = useState('');
-    const [isSearchValidity, setSearchValidity] = useState(false);
-    // записать значение в строке поиска
-    // и проверить на валидность
-    const handleChangeSearchValue = (evt) => {
-      if (!evt.target.validity) {
-        setSearchValidity(false);
-      } else {
-        setSearchValidity(true);
-      }
-
-      setSearchValue(evt.target.value);
-    };
-  */
-  // отфильтровать фильмы по значению в поиске
-  /*
-  const filteredMovies = allMovies.filter((movie) => movie.nameRU.toLowerCase()
-    .includes(searchValue.toLowerCase()));
-*/
-
   // если нет данных, то сказать об этом
   // onSearchMoviesByValue={onSearchMoviesByValue}
   // handlePreloader={handlePreloader}
@@ -82,6 +37,9 @@ export default function Movies({
         ) : (
           <MoviesCardList
             movieCards={movies}
+            savedMoviesPage={false}
+            isNotFound={isNotFound}
+            isErrorServer={isErrorServer}
           />
         )}
       </div>

@@ -25,31 +25,16 @@ export default function App() {
   const [backgroundHeader, setBackgroundHeader] = useState(false); // цвет фона шапки страницы
   // разрешить пользователю удалять карточки после сохранения
   const [isDeleteMoviesCard, setDeleteMoviesCard] = useState(false);
-
   // стейт лоадера
   const [isLoading, setLoading] = useState(false);
   // стейт фильмов
   const [movies, setMovies] = useState([]);
   // стейт всех загруженных фильмов со стороннего BeatfilmMoviesApi
   const [allMovies, setAllMovies] = useState([]);
-  /*
-    загрузить все карточки с фильмами BeatfilmMoviesApi
-    const loadMoviesApi = () => {
-      MoviesApi.getMovies()
-        .then((movies) => {
-          setAllMovies(movies);
-        })
-        .catch(() => {
-          setAllMovies([]);
-        });
-    };
-  */
-
-  // отфильтровать фильмы по значению в поиске
-  /*
-  const filteredMovies = allMovies.filter((movie) => movie.nameRU.toLowerCase()
-    .includes(searchValue.toLowerCase()));
-*/
+  // стей сообщения неудачного поиска
+  const [isNotFound, setNotFound] = useState(false);
+  // стей сообщения об ошибке сервера при поиске
+  const [isErrorServer, setErrorServer] = useState(false);
 
   // eslint-disable-next-line no-shadow
   const handleFilteredMovies = (movies, key) => {
@@ -75,16 +60,17 @@ export default function App() {
           if (resFilteredMovies.length === 0) {
             setMovies([]);
             // сообщить потльзователю, что "Ничего не найдено"
+            setNotFound(true);
+          } else {
             // localStorage можно вынести
             localStorage.setItem('movies', JSON.stringify(resFilteredMovies));
             setMovies(JSON.parse(localStorage.getItem('movies')));
+            setLoading(false);
           }
-        })
-        .then(() => {
-          setLoading(false);
         })
         .catch(() => {
           setLoading(false);
+          setErrorServer(true);
           setAllMovies([]);
         });
     } else {
@@ -94,12 +80,14 @@ export default function App() {
         setMovies([]);
         setLoading(false);
         // сообщить потльзователю, что "Ничего не найдено"
+        setNotFound(true);
       } else if (resFilteredMovies.length !== 0) {
         // localStorage можно вынести
         localStorage.setItem('movies', JSON.stringify(resFilteredMovies));
         setMovies(JSON.parse(localStorage.getItem('movies')));
         setLoading(false);
       } else {
+        setErrorServer(true);
         setMovies([]);
       }
     }
@@ -200,6 +188,8 @@ export default function App() {
               isLoading={isLoading}
               movies={movies}
               onSearchMoviesByValue={handleSearchMovies}
+              isNotFound={isNotFound}
+              isErrorServer={isErrorServer}
             />
           </Route>
 

@@ -114,9 +114,9 @@
     padding: 14px 12px;
     display: flex;
     flex-direction: row;
+    align-self: normal;
     /*
     align-items: start;
-    align-self: normal;
     */
   }
   .movies-card__title {
