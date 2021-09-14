@@ -35,17 +35,23 @@ export default function App() {
   const [isNotFound, setNotFound] = useState(false);
   // стей сообщения об ошибке сервера при поиске
   const [isErrorServer, setErrorServer] = useState(false);
+  // стейт чекбокса
+  const [checkboxValue, setCheckboxValue] = useState(false);
+
+  const handleToggleCheckbox = () => {
+    setCheckboxValue(!checkboxValue);
+  };
 
   // eslint-disable-next-line no-shadow
-  const handleFilteredMovies = (movies, key) => {
+  const handleFilteredMovies = (movies, keyword) => {
     const filteredMovies = movies
-      .filter((movie) => movie.nameRU.toLowerCase()
-        .includes(key.toLowerCase()));
+      .filter((movie) => movie.nameRU.toLowerCase().includes(keyword.toLowerCase())
+        || (movie.nameEN ? movie.nameEN : '').toLowerCase().includes(keyword.toLowerCase()));
 
     return filteredMovies;
   };
 
-  const handleSearchMovies = (key) => {
+  const handleSearchMovies = (keyword) => {
     setLoading(true);
     setMovies([]);
 
@@ -55,7 +61,7 @@ export default function App() {
         // eslint-disable-next-line no-shadow
         .then((movies) => {
           setAllMovies(movies);
-          const resFilteredMovies = handleFilteredMovies(movies, key);
+          const resFilteredMovies = handleFilteredMovies(movies, keyword);
 
           if (resFilteredMovies.length === 0) {
             setMovies([]);
@@ -75,7 +81,7 @@ export default function App() {
           setAllMovies([]);
         });
     } else {
-      const resFilteredMovies = handleFilteredMovies(allMovies, key);
+      const resFilteredMovies = handleFilteredMovies(allMovies, keyword);
 
       if (resFilteredMovies.length === 0) {
         setMovies([]);
@@ -103,13 +109,6 @@ export default function App() {
   // изменить стейт при регистрации - выйти
   const signOut = () => {
     setLoggedIn(false);
-  };
-
-  // делаем чекбокс
-  const [checkboxValue, setCheckboxValue] = useState(false);
-
-  const handleToggleCheckbox = () => {
-    setCheckboxValue(!checkboxValue);
   };
 
   useEffect(() => {
