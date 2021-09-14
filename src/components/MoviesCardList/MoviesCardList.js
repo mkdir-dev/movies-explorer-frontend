@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 
@@ -42,13 +41,13 @@ export default function MoviesCardList({
     <section className="movies-card-list">
       <span
         className={`movies-card-list__message
-          ${!isNotFound ? 'movies-card-list__message_hide' : ''} `}
+          ${!isNotFound ? 'movies-card-list__hide' : ''} `}
       >
         Ничего не найдено
       </span>
       <span
         className={`movies-card-list__message
-          ${!isErrorServer ? 'movies-card-list__message_hide' : ''} `}
+          ${!isErrorServer ? 'movies-card-list__hide' : ''} `}
       >
         Во время запроса произошла ошибка. Возможно,
         проблема с соединением или сервер недоступен.
@@ -64,7 +63,8 @@ export default function MoviesCardList({
         ))}
       </ul>
       <button
-        className="movies-card-list__button"
+        className={`${movieCards.length <= moviesCount
+          ? 'movies-card-list__hide' : 'movies-card-list__button'}`}
         type="button"
         onClick={handleMore}
       >

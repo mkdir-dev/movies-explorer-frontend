@@ -59,6 +59,7 @@ export default function App() {
 
           if (resFilteredMovies.length === 0) {
             setMovies([]);
+            setLoading(false);
             // сообщить потльзователю, что "Ничего не найдено"
             setNotFound(true);
           } else {
@@ -87,6 +88,7 @@ export default function App() {
         setMovies(JSON.parse(localStorage.getItem('movies')));
         setLoading(false);
       } else {
+        setLoading(false);
         setErrorServer(true);
         setMovies([]);
       }
