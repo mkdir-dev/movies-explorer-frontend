@@ -20,15 +20,15 @@ export default function MoviesCard({ card, deleteMoviesCard }) {
       thumbnail: `https://api.nomoreparties.co${card.image?.url}`,
       movieId: card.id,
     };
-    */
+  */
 
-  function handleLikeClick() {
+  const handleLikeClick = () => {
     setIsLiked(!isLiked);
-  }
+  };
 
-  function handleDeleteMovie() {
+  const handleDeleteMovie = () => {
     console.log('Не получилось удалить фильм. Попробуйте позже');
-  }
+  };
 
   return (
     <li className="movies-card">

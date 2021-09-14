@@ -14,7 +14,7 @@ import Profile from '../Profile/Profile';
 import NotFound from '../NotFound/NotFound';
 import Footer from '../Footer/Footer';
 
-// import * as MoviesApi from '../../utils/MoviesApi';
+import * as MoviesApi from '../../utils/MoviesApi';
 
 export default function App() {
   const location = useLocation();
@@ -25,6 +25,85 @@ export default function App() {
   const [backgroundHeader, setBackgroundHeader] = useState(false); // цвет фона шапки страницы
   // разрешить пользователю удалять карточки после сохранения
   const [isDeleteMoviesCard, setDeleteMoviesCard] = useState(false);
+
+  // стейт лоадера
+  const [isLoading, setLoading] = useState(false);
+  // стейт фильмов
+  const [movies, setMovies] = useState([]);
+  // стейт всех загруженных фильмов со стороннего BeatfilmMoviesApi
+  const [allMovies, setAllMovies] = useState([]);
+  /*
+    загрузить все карточки с фильмами BeatfilmMoviesApi
+    const loadMoviesApi = () => {
+      MoviesApi.getMovies()
+        .then((movies) => {
+          setAllMovies(movies);
+        })
+        .catch(() => {
+          setAllMovies([]);
+        });
+    };
+  */
+
+  // отфильтровать фильмы по значению в поиске
+  /*
+  const filteredMovies = allMovies.filter((movie) => movie.nameRU.toLowerCase()
+    .includes(searchValue.toLowerCase()));
+*/
+
+  // eslint-disable-next-line no-shadow
+  const handleFilteredMovies = (movies, key) => {
+    const filteredMovies = movies
+      .filter((movie) => movie.nameRU.toLowerCase()
+        .includes(key.toLowerCase()));
+
+    return filteredMovies;
+  };
+
+  const handleSearchMovies = (key) => {
+    setLoading(true);
+    setMovies([]);
+
+    if (allMovies.length === 0) {
+      // загрузить все карточки с фильмами BeatfilmMoviesApi
+      MoviesApi.getMovies()
+        // eslint-disable-next-line no-shadow
+        .then((movies) => {
+          setAllMovies(movies);
+          const resFilteredMovies = handleFilteredMovies(movies, key);
+
+          if (resFilteredMovies.length === 0) {
+            setMovies([]);
+            // сообщить потльзователю, что "Ничего не найдено"
+            // localStorage можно вынести
+            localStorage.setItem('movies', JSON.stringify(resFilteredMovies));
+            setMovies(JSON.parse(localStorage.getItem('movies')));
+          }
+        })
+        .then(() => {
+          setLoading(false);
+        })
+        .catch(() => {
+          setLoading(false);
+          setAllMovies([]);
+        });
+    } else {
+      const resFilteredMovies = handleFilteredMovies(allMovies, key);
+
+      if (resFilteredMovies.length === 0) {
+        setMovies([]);
+        setLoading(false);
+        // сообщить потльзователю, что "Ничего не найдено"
+      } else if (resFilteredMovies.length !== 0) {
+        // localStorage можно вынести
+        localStorage.setItem('movies', JSON.stringify(resFilteredMovies));
+        setMovies(JSON.parse(localStorage.getItem('movies')));
+        setLoading(false);
+      } else {
+        setMovies([]);
+      }
+    }
+  };
 
   // изменить стейт при регистрации - войти
   const onLogin = () => {
@@ -118,6 +197,9 @@ export default function App() {
             <Movies
               checkboxOn={checkboxValue}
               handleToggleCheckbox={handleToggleCheckbox}
+              isLoading={isLoading}
+              movies={movies}
+              onSearchMoviesByValue={handleSearchMovies}
             />
           </Route>
 
