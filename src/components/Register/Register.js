@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import FormAuth from '../FormAuth/FormAuth';
 import useValidForm from '../../hooks/useValidForm';
 
-export default function Register({ onRegister }) {
+export default function Register({ onRegister, isMessageErrorAPI }) {
   const {
     values, errors, isValidForm, handleChange, resetForm,
   } = useValidForm();
@@ -33,6 +33,7 @@ export default function Register({ onRegister }) {
       linkText="Войти"
       onSubmit={handleSubmit}
       isDisabled={!isValidForm}
+      isMessageErrorAPI={isMessageErrorAPI}
     >
 
       <label

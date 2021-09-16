@@ -1,6 +1,8 @@
 /* eslint-disable promise/always-return */
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, useLocation } from 'react-router-dom';
+import {
+  Route, Switch, useLocation, useHistory,
+} from 'react-router-dom';
 
 import './App.css';
 
@@ -21,6 +23,7 @@ import CurrentUserContext from '../../context/CurrentUserContext';
 
 export default function App() {
   const location = useLocation();
+  const history = useHistory();
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
@@ -41,6 +44,8 @@ export default function App() {
   const [isErrorServer, setErrorServer] = useState(false);
   // стейт чекбокса
   const [checkboxValue, setCheckboxValue] = useState(false);
+  // стейт сообщения об ошибке API
+  const [isMessageErrorAPI, setMessageErrorAPI] = useState('');
 
   const handleToggleCheckbox = () => {
     setCurrentUser('');
@@ -58,25 +63,27 @@ export default function App() {
   };
 
   // вход пользователя
-  const handleLogin = (data) => {
-    MainApi.authorization(data)
+  const handleLogin = (email, password) => {
+    MainApi.authorization(email, password)
       .then((res) => {
-        console.log(res);
+        localStorage.setItem('token', res.token);
         setLoggedIn(true);
+        history.push('/movies');
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(`Не удалось войти. Ошибка: ${err}.`);
+      });
   };
 
   // регистрация пользователя
-  const handleRegister = (data) => {
-    console.log(data);
-    MainApi.register(data)
-      .then((res) => {
-        console.log(res);
-        handleLogin(data);
+  const handleRegister = (name, email, password) => {
+    MainApi.register(name, email, password)
+      .then(() => {
+        handleLogin(name, email, password);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(`Не удалось зарегистрироваться. Ошибка: ${err}.`);
+        setMessageErrorAPI('Что-то пошло не так...');
       });
   };
 
@@ -217,6 +224,7 @@ export default function App() {
             <Route path="/signup">
               <Register
                 onRegister={handleRegister}
+                isMessageErrorAPI={isMessageErrorAPI}
               />
             </Route>
 

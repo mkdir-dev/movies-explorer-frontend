@@ -88,7 +88,18 @@
 
 .auth-form__input-error {
   position: absolute;
-  top: 78px;
+  /* изменить, т.к. сообщение не влезает */
+  top: 72px;
+  font-style: normal;
+  font-weight: normal;
+  /* изменить, т.к. сообщение не влезает */
+  font-size: 9px;
+  line-height: 12px;
+  color: rgba(238, 52, 101, 1);
+}
+
+.auth-form__api-error {
+  position: absolute;
   font-style: normal;
   font-weight: normal;
   font-size: 10px;

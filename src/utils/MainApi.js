@@ -21,11 +21,11 @@ export const register = ({ name, email, password }) => fetch(`${BASE_URL}/signup
 })
   .then((res) => fixPromise(res));
 
-export const authorization = ({ password, email }) => fetch(`${BASE_URL}/signin`, {
+export const authorization = ({ email, password }) => fetch(`${BASE_URL}/signin`, {
   method: 'POST',
   headers,
   body: JSON.stringify({
-    password, email,
+    email, password,
   }),
 })
   .then((res) => fixPromise(res));

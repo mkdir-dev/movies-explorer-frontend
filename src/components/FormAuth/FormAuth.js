@@ -7,7 +7,8 @@ import Logotype from '../Logotype/Logotype';
 
 export default function FormAuth({
   /* onLogin, */ children, /* linkHistory, */ onSubmit,
-  title, buttonText, typeButton, question, link, linkText, isDisabled,
+  title, buttonText, typeButton, question,
+  link, linkText, isDisabled, isMessageErrorAPI,
 }) {
   // const history = useHistory();
   /*
@@ -33,6 +34,7 @@ export default function FormAuth({
 
           {children}
 
+          <span className="auth-form__api-error">{isMessageErrorAPI}</span>
           <button
             aria-label={buttonText}
             className={`
