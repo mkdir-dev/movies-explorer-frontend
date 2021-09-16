@@ -73,7 +73,6 @@ export default function Register({ onRegister, isMessageErrorAPI }) {
           type="email"
           placeholder="E-mail"
           minLength="5"
-          maxLength="40"
           value={values.email || ''}
           onChange={handleChange}
           required
@@ -97,7 +96,6 @@ export default function Register({ onRegister, isMessageErrorAPI }) {
           type="password"
           placeholder="Пароль"
           minLength="8"
-          maxLength="40"
           value={values.password || ''}
           onChange={handleChange}
           required

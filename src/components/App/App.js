@@ -48,13 +48,7 @@ export default function App() {
   const [isMessageErrorAPI, setMessageErrorAPI] = useState('');
 
   const handleToggleCheckbox = () => {
-    setCurrentUser('');
     setCheckboxValue(!checkboxValue);
-  };
-
-  // изменить стейт при регистрации - войти
-  const onLogin = () => {
-    setLoggedIn(true);
   };
 
   // изменить стейт при регистрации - выйти
@@ -66,12 +60,16 @@ export default function App() {
   const handleLogin = (email, password) => {
     MainApi.authorization(email, password)
       .then((res) => {
+        // сбросить текст, иначе останется
+        setMessageErrorAPI('');
         localStorage.setItem('token', res.token);
+        setCurrentUser(res);
         setLoggedIn(true);
         history.push('/movies');
       })
       .catch((err) => {
         console.log(`Не удалось войти. Ошибка: ${err}.`);
+        setMessageErrorAPI('Что-то пошло не так...');
       });
   };
 
@@ -79,6 +77,8 @@ export default function App() {
   const handleRegister = (name, email, password) => {
     MainApi.register(name, email, password)
       .then(() => {
+        // сбросить текст, иначе останется
+        setMessageErrorAPI('');
         handleLogin(name, email, password);
       })
       .catch((err) => {
@@ -186,7 +186,7 @@ export default function App() {
     // если пользователь на странице с фильмами, то считать его залогиненным
     if (location.pathname === '/movies'
       || location.pathname === '/saved-movies') {
-      onLogin();
+      setLoggedIn(true);
     }
 
     // если пользователь на странице сохраненных фильмов, то может их удалить
@@ -230,8 +230,8 @@ export default function App() {
 
             <Route path="/signin">
               <Login
-                // onLogin={onLogin}
                 onLogin={handleLogin}
+                isMessageErrorAPI={isMessageErrorAPI}
               />
             </Route>
 
