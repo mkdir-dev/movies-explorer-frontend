@@ -14,12 +14,16 @@ import Profile from '../Profile/Profile';
 import NotFound from '../NotFound/NotFound';
 import Footer from '../Footer/Footer';
 
+import * as MainApi from '../../utils/MainApi';
 import * as MoviesApi from '../../utils/MoviesApi';
+
+import CurrentUserContext from '../../context/CurrentUserContext';
 
 export default function App() {
   const location = useLocation();
 
   const [loggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = React.useState({});
   const [headerLocation, setHeaderLocation] = useState(false); // отображение header
   const [footerLocation, setFooterLocation] = useState(false); // отображение  footer
   const [backgroundHeader, setBackgroundHeader] = useState(false); // цвет фона шапки страницы
@@ -39,7 +43,41 @@ export default function App() {
   const [checkboxValue, setCheckboxValue] = useState(false);
 
   const handleToggleCheckbox = () => {
+    setCurrentUser('');
     setCheckboxValue(!checkboxValue);
+  };
+
+  // изменить стейт при регистрации - войти
+  const onLogin = () => {
+    setLoggedIn(true);
+  };
+
+  // изменить стейт при регистрации - выйти
+  const signOut = () => {
+    setLoggedIn(false);
+  };
+
+  // вход пользователя
+  const handleLogin = (data) => {
+    MainApi.authorization(data)
+      .then((res) => {
+        console.log(res);
+        setLoggedIn(true);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  // регистрация пользователя
+  const handleRegister = (data) => {
+    console.log(data);
+    MainApi.register(data)
+      .then((res) => {
+        console.log(res);
+        handleLogin(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   // eslint-disable-next-line no-shadow
@@ -66,6 +104,7 @@ export default function App() {
   const handleSearchMovies = (keyword) => {
     setLoading(true);
     setMovies([]);
+    setNotFound(false);
 
     if (allMovies.length === 0) {
       // загрузить все карточки с фильмами BeatfilmMoviesApi
@@ -111,16 +150,6 @@ export default function App() {
         setMovies([]);
       }
     }
-  };
-
-  // изменить стейт при регистрации - войти
-  const onLogin = () => {
-    setLoggedIn(true);
-  };
-
-  // изменить стейт при регистрации - выйти
-  const signOut = () => {
-    setLoggedIn(false);
   };
 
   useEffect(() => {
@@ -169,60 +198,69 @@ export default function App() {
   }, [location]);
 
   return (
-    <div className="page">
-      <Header
-        headerLocation={headerLocation}
-        loggedIn={loggedIn}
-        backgroundHeader={backgroundHeader}
-      />
-      <main className="content">
-        <Switch>
+    <CurrentUserContext.Provider
+      value={currentUser}
+    >
+      <div className="page">
+        <Header
+          headerLocation={headerLocation}
+          loggedIn={loggedIn}
+          backgroundHeader={backgroundHeader}
+        />
+        <main className="content">
+          <Switch>
 
-          <Route exact path="/">
-            <Main />
-          </Route>
+            <Route exact path="/">
+              <Main />
+            </Route>
 
-          <Route path="/signup">
-            <Register />
-          </Route>
+            <Route path="/signup">
+              <Register
+                onRegister={handleRegister}
+              />
+            </Route>
 
-          <Route path="/signin">
-            <Login onLogin={onLogin} />
-          </Route>
+            <Route path="/signin">
+              <Login
+                // onLogin={onLogin}
+                onLogin={handleLogin}
+              />
+            </Route>
 
-          <Route path="/profile">
-            <Profile signOut={signOut} />
-          </Route>
+            <Route path="/profile">
+              <Profile signOut={signOut} />
+            </Route>
 
-          <Route path="/movies">
-            <Movies
-              checkboxOn={checkboxValue}
-              handleToggleCheckbox={handleToggleCheckbox}
-              isLoading={isLoading}
-              movies={movies}
-              onSearchMoviesByValue={handleSearchMovies}
-              isNotFound={isNotFound}
-              isErrorServer={isErrorServer}
-            />
-          </Route>
+            <Route path="/movies">
+              <Movies
+                checkboxOn={checkboxValue}
+                handleToggleCheckbox={handleToggleCheckbox}
+                isLoading={isLoading}
+                movies={movies}
+                onSearchMoviesByValue={handleSearchMovies}
+                isNotFound={isNotFound}
+                isErrorServer={isErrorServer}
+              />
+            </Route>
 
-          <Route path="/saved-movies">
-            <SavedMovies
-              checkboxOn={checkboxValue}
-              handleToggleCheckbox={handleToggleCheckbox}
-              deleteMoviesCard={isDeleteMoviesCard}
-            />
-          </Route>
+            <Route path="/saved-movies">
+              <SavedMovies
+                checkboxOn={checkboxValue}
+                handleToggleCheckbox={handleToggleCheckbox}
+                deleteMoviesCard={isDeleteMoviesCard}
+              />
+            </Route>
 
-          <Route path="/not-found">
-            <NotFound />
-          </Route>
+            <Route path="/not-found">
+              <NotFound />
+            </Route>
 
-        </Switch>
-      </main>
-      <Footer
-        footerLocation={footerLocation}
-      />
-    </div>
+          </Switch>
+        </main>
+        <Footer
+          footerLocation={footerLocation}
+        />
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
