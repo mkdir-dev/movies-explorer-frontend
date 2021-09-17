@@ -25,7 +25,7 @@ export default function useValidForm() {
   );
 
   return {
-    values, errors, isValidForm, handleChange, resetForm,
+    values, setValues, errors, isValidForm, handleChange, resetForm,
   };
 }
 

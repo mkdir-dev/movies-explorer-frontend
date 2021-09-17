@@ -39,7 +39,7 @@ export const getUserInfo = (token) => fetch(`${BASE_URL}/users/me`, {
 })
   .then((res) => fixPromise(res));
 
-export const editUserInfo = (token, name, email) => fetch(`${BASE_URL}/users/me`, {
+export const editUserInfo = (token, { name, email }) => fetch(`${BASE_URL}/users/me`, {
   method: 'PATCH',
   headers: {
     ...headers,

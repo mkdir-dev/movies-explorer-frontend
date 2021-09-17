@@ -26,7 +26,7 @@ export default function App() {
   const history = useHistory();
 
   const [loggedIn, setLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = React.useState({});
+  const [currentUser, setCurrentUser] = React.useState('');
   const [headerLocation, setHeaderLocation] = useState(false); // отображение header
   const [footerLocation, setFooterLocation] = useState(false); // отображение  footer
   const [backgroundHeader, setBackgroundHeader] = useState(false); // цвет фона шапки страницы
@@ -47,6 +47,39 @@ export default function App() {
   // стейт сообщения об ошибке API
   const [isMessageErrorAPI, setMessageErrorAPI] = useState('');
 
+  const checkToken = () => {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      MainApi.getUserInfo(token)
+        .then((userInfo) => {
+          setCurrentUser(userInfo);
+        })
+        .catch((err) => {
+          console.log(`Не удалось передать токен. Ошибка: ${err}.`);
+        });
+    } else {
+      console.log('Нет токена - потерялся');
+    }
+  };
+
+  useEffect(() => {
+    checkToken();
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (loggedIn) {
+      MainApi.getUserInfo(token)
+        .then((userInfo) => {
+          setCurrentUser(userInfo);
+        })
+        .catch((err) => {
+          console.log(`Не удалось получить данные пользователя. Ошибка: ${err}.`);
+        });
+    }
+  }, [loggedIn]);
+
   const handleToggleCheckbox = () => {
     setCheckboxValue(!checkboxValue);
   };
@@ -63,7 +96,7 @@ export default function App() {
         // сбросить текст, иначе останется
         setMessageErrorAPI('');
         localStorage.setItem('token', res.token);
-        setCurrentUser(res);
+        // setCurrentUser(res);
         setLoggedIn(true);
         history.push('/movies');
       })
@@ -84,6 +117,18 @@ export default function App() {
       .catch((err) => {
         console.log(`Не удалось зарегистрироваться. Ошибка: ${err}.`);
         setMessageErrorAPI('Что-то пошло не так...');
+      });
+  };
+
+  // редактирование профиля
+  const handleEditUserInfo = (name, email) => {
+    const token = localStorage.getItem('token');
+    MainApi.editUserInfo(token, name, email)
+      .then((res) => {
+        setCurrentUser(res);
+      })
+      .catch((err) => {
+        console.log(`Не удалось изменить данные пользователя. Ошибка: ${err}.`);
       });
   };
 
@@ -236,7 +281,10 @@ export default function App() {
             </Route>
 
             <Route path="/profile">
-              <Profile signOut={signOut} />
+              <Profile
+                signOut={signOut}
+                onEditUserInfo={handleEditUserInfo}
+              />
             </Route>
 
             <Route path="/movies">

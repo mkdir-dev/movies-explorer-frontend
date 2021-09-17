@@ -98,6 +98,18 @@
   color: rgba(238, 52, 101, 1);
 }
 
+.auth-form__input-error_type_profile {
+  position: absolute;
+  /* изменить, т.к. сообщение не влезает */
+  top: 32px;
+  font-style: normal;
+  font-weight: normal;
+  /* изменить, т.к. сообщение не влезает */
+  font-size: 9px;
+  line-height: 12px;
+  color: rgba(238, 52, 101, 1);
+}
+
 .auth-form__api-error {
   position: absolute;
   font-style: normal;

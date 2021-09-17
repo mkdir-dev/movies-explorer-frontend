@@ -1,30 +1,50 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-no-bind */
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-// eslint-disable-next-line react/prop-types
-export default function Profile({ signOut }) {
+import useValidForm from '../../hooks/useValidForm';
+import CurrentUserContext from '../../context/CurrentUserContext';
+
+export default function Profile({ signOut, onEditUserInfo }) {
+  const {
+    // eslint-disable-next-line no-unused-vars
+    values, setValues, errors, isValidForm, handleChange, resetForm,
+  } = useValidForm();
+  const currentUser = useContext(CurrentUserContext);
   const history = useHistory();
 
-  function handleSubmit(evt) {
-    signOut();
+  const handleEditProfile = (evt) => {
     evt.preventDefault();
-    history.push('/');
-  }
+    onEditUserInfo({
+      name: values.name,
+      email: values.email,
+    });
+  };
 
-  function handleSubmitError() {
-    console.log('Не получилось редактировать профиль. Попробуйте позже');
-  }
+  const handleSignOut = (evt) => {
+    evt.preventDefault();
+    signOut();
+    history.push('/');
+  };
+
+  useEffect(() => {
+    resetForm();
+    setValues({
+      email: currentUser.email,
+      name: currentUser.name,
+    });
+  }, [resetForm, currentUser, setValues]);
 
   return (
     <section className="auth-form">
       <div className="auth-form__container auth-form__container_type_profile">
         <h2 className="auth-form__title auth-form__title_type_profile">
-          Привет, Виталий!
+          {`Привет, ${currentUser.name}!`}
         </h2>
         <form
           className="auth-form__form auth-form__form_type_profile"
-          onSubmit={handleSubmit}
+        // onSubmit={handleSubmit}
         >
 
           <label
@@ -39,13 +59,18 @@ export default function Profile({ signOut }) {
               type="text"
               placeholder="Имя"
               minLength="2"
-              maxLength="40"
-              defaultValue="Виталий"
+              // сделать 30, потому что так в бэкенде
+              maxLength="30"
+              pattern="[а-яА-Яa-zA-ZёË\- ]{2,30}"
+              value={values.name || ''}
+              onChange={handleChange}
               required
             />
             <span
-              className="auth-form__input-error"
-            />
+              className="auth-form__input-error_type_profile"
+            >
+              {errors.name}
+            </span>
           </label>
 
           <label
@@ -60,25 +85,27 @@ export default function Profile({ signOut }) {
               type="email"
               placeholder="E-mail"
               minLength="5"
-              maxLength="40"
-              defaultValue="pochta@yandex.ru"
+              value={values.email || ''}
+              onChange={handleChange}
               required
             />
             <span
-              className="auth-form__input-error"
-            />
+              className="auth-form__input-error_type_profile"
+            >
+              {errors.email}
+            </span>
           </label>
 
           <Link
             className="auth-form__link auth-form__link_edit"
-            onClick={handleSubmitError}
+            onClick={handleEditProfile}
             to="/profile"
           >
             Редактировать
           </Link>
           <Link
             className="auth-form__link auth-form__link_signout"
-            onClick={handleSubmit}
+            onClick={handleSignOut}
             to="/"
           >
             Выйти из аккаунта
