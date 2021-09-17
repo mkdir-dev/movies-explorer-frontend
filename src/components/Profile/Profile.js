@@ -1,18 +1,14 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-no-bind */
 import React, { useEffect, useContext } from 'react';
-import { Link, useHistory } from 'react-router-dom';
 
 import useValidForm from '../../hooks/useValidForm';
 import CurrentUserContext from '../../context/CurrentUserContext';
 
 export default function Profile({ signOut, onEditUserInfo }) {
   const {
-    // eslint-disable-next-line no-unused-vars
     values, setValues, errors, isValidForm, handleChange, resetForm,
   } = useValidForm();
   const currentUser = useContext(CurrentUserContext);
-  const history = useHistory();
 
   const handleEditProfile = (evt) => {
     evt.preventDefault();
@@ -25,7 +21,6 @@ export default function Profile({ signOut, onEditUserInfo }) {
   const handleSignOut = (evt) => {
     evt.preventDefault();
     signOut();
-    history.push('/');
   };
 
   useEffect(() => {
@@ -44,7 +39,6 @@ export default function Profile({ signOut, onEditUserInfo }) {
         </h2>
         <form
           className="auth-form__form auth-form__form_type_profile"
-        // onSubmit={handleSubmit}
         >
 
           <label
@@ -96,20 +90,28 @@ export default function Profile({ signOut, onEditUserInfo }) {
             </span>
           </label>
 
-          <Link
-            className="auth-form__link auth-form__link_edit"
+          <button
+            aria-label="Редактировать"
+            type="submit"
+            className={`
+            auth-form__button-profile auth-form__button-profile_edit
+            ${!isValidForm ? 'auth-form__button-profile_edit_disabled' : ''}
+            `}
             onClick={handleEditProfile}
             to="/profile"
           >
             Редактировать
-          </Link>
-          <Link
-            className="auth-form__link auth-form__link_signout"
+          </button>
+
+          <button
+            aria-label="Редактировать"
+            type="submit"
+            className="auth-form__button-profile auth-form__button-profile_signout"
             onClick={handleSignOut}
             to="/"
           >
             Выйти из аккаунта
-          </Link>
+          </button>
 
         </form>
       </div>

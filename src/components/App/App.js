@@ -84,9 +84,12 @@ export default function App() {
     setCheckboxValue(!checkboxValue);
   };
 
-  // изменить стейт при регистрации - выйти
+  // изменить стейт при выходе из профиля
   const signOut = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('movies');
     setLoggedIn(false);
+    history.push('/');
   };
 
   // вход пользователя
@@ -126,6 +129,7 @@ export default function App() {
     MainApi.editUserInfo(token, name, email)
       .then((res) => {
         setCurrentUser(res);
+        console.log('Данные пользователя изменены успешно');
       })
       .catch((err) => {
         console.log(`Не удалось изменить данные пользователя. Ошибка: ${err}.`);
