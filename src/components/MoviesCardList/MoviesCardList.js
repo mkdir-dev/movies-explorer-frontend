@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 import './MoviesCardList.css';
+
 import MoviesCard from '../MoviesCard/MoviesCard';
 
 export default function MoviesCardList({
@@ -11,13 +12,13 @@ export default function MoviesCardList({
   onDeleteMoviesCard,
   isNotFound,
   isErrorServer,
-  pageSavedMovies,
+  // pageSavedMovies,
 }) {
   const windowWidth = window.innerWidth;
   const [isDisplayWidth, setDisplayWidth] = useState(windowWidth);
   const [moviesCount, setMoviesCount] = useState(0);
   const [addMoviesCount, setAddMoviesCount] = useState(0);
-  console.log(pageSavedMovies); // !!!
+
   const handleMore = () => {
     setMoviesCount(moviesCount + addMoviesCount);
   };

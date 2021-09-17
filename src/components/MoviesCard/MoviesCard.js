@@ -1,6 +1,6 @@
 /* eslint-disable no-shadow */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './MoviesCard.css';
 
@@ -35,7 +35,7 @@ export default function MoviesCard({
   const handleDeleteMovie = () => {
     // функция для pageSavedMovies
     onDeleteMoviesCard(movie);
-    setIsLiked(false);
+    // setIsLiked(false);
   };
 
   const savedMovies = JSON.parse(
@@ -47,9 +47,17 @@ export default function MoviesCard({
   );
 
   const handleDislikeClick = () => {
-    setIsLiked(false);
     onDeleteMoviesCard(currentMovie._id);
+    setIsLiked(false);
   };
+
+  useEffect(() => {
+    if (currentMovie) {
+      setIsLiked(true);
+    } else {
+      setIsLiked(false);
+    }
+  }, [currentMovie]);
 
   return (
     <li className="movies-card">
@@ -78,7 +86,6 @@ export default function MoviesCard({
           className={`
           movies-card__like
           ${isLiked && 'movies-card__like_active'}
-          ${deleteMoviesCard && 'movies-card__delete'}
           `}
           type="button"
           aria-label="Лайк"

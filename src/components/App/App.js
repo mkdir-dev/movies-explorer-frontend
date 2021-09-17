@@ -155,7 +155,7 @@ export default function App() {
 
   const handleDeleteMoviesCard = (movieId) => {
     const token = localStorage.getItem('token');
-    console.log(movieId);
+    // console.log(movieId);
     MainApi.deleteMovie(token, movieId)
       .then(() => {
         const newSavedMovies = isSavedMovies.filter(
