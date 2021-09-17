@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 
@@ -7,6 +8,8 @@ export default function MoviesCard({
   card,
   onSaveMoviesCard,
   deleteMoviesCard,
+  onDeleteMoviesCard,
+  pageSavedMovies,
 }) {
   const [isLiked, setIsLiked] = useState(false);
 
@@ -26,11 +29,26 @@ export default function MoviesCard({
 
   const handleLikeClick = () => {
     onSaveMoviesCard(movie);
-    setIsLiked(!isLiked);
+    setIsLiked(true);
   };
 
   const handleDeleteMovie = () => {
-    console.log('Не получилось удалить фильм. Попробуйте позже');
+    // функция для pageSavedMovies
+    onDeleteMoviesCard(movie);
+    setIsLiked(false);
+  };
+
+  const savedMovies = JSON.parse(
+    localStorage.getItem('savedMovies'),
+  );
+
+  const currentMovie = savedMovies.find(
+    (movie) => movie.nameRU === card.nameRU,
+  );
+
+  const handleDislikeClick = () => {
+    setIsLiked(false);
+    onDeleteMoviesCard(currentMovie._id);
   };
 
   return (
@@ -44,6 +62,18 @@ export default function MoviesCard({
             {`${Math.trunc(card.duration / 60)}ч ${card.duration % 60}м`}
           </p>
         </div>
+        {pageSavedMovies ? (
+          <button
+            aria-label="Удалить"
+            type="button"
+            className={`movies-card__like
+              ${deleteMoviesCard && 'movies-card__delete'}
+            `}
+            onClick={handleDeleteMovie}
+          />
+        ) : (
+          <button type="button" aria-label="Лайк" className="hide-section" />
+        )}
         <button
           className={`
           movies-card__like
@@ -52,7 +82,7 @@ export default function MoviesCard({
           `}
           type="button"
           aria-label="Лайк"
-          onClick={deleteMoviesCard ? handleDeleteMovie : handleLikeClick}
+          onClick={isLiked ? handleDislikeClick : handleLikeClick}
         />
       </div>
       <div className="movies-card__image-container">

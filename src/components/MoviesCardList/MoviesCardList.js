@@ -7,15 +7,17 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 export default function MoviesCardList({
   movieCards,
   onSaveMoviesCard,
-  deleteMoviesCard,
+  // deleteMoviesCard,
+  onDeleteMoviesCard,
   isNotFound,
   isErrorServer,
+  pageSavedMovies,
 }) {
   const windowWidth = window.innerWidth;
   const [isDisplayWidth, setDisplayWidth] = useState(windowWidth);
   const [moviesCount, setMoviesCount] = useState(0);
   const [addMoviesCount, setAddMoviesCount] = useState(0);
-
+  console.log(pageSavedMovies); // !!!
   const handleMore = () => {
     setMoviesCount(moviesCount + addMoviesCount);
   };
@@ -60,7 +62,8 @@ export default function MoviesCardList({
             card={card}
             key={card.id}
             onSaveMoviesCard={onSaveMoviesCard}
-            deleteMoviesCard={deleteMoviesCard}
+            // deleteMoviesCard={deleteMoviesCard}
+            onDeleteMoviesCard={onDeleteMoviesCard}
           />
         ))}
       </ul>

@@ -20,10 +20,8 @@ export default function Movies({
   isNotFound,
   isErrorServer,
   onSaveMoviesCard,
+  onDeleteMoviesCard,
 }) {
-  // если нет данных, то сказать об этом
-  // onSearchMoviesByValue={onSearchMoviesByValue}
-  // handlePreloader={handlePreloader}
   return (
     <section className="movies">
       <div className="container">
@@ -31,17 +29,18 @@ export default function Movies({
           checkboxOn={checkboxOn}
           handleToggleCheckbox={handleToggleCheckbox}
           onSearchMoviesByValue={onSearchMoviesByValue}
-          savedMoviesPage={false}
+          pageSavedMovies={false}
         />
         {isLoading ? (
           <Preloader />
         ) : (
           <MoviesCardList
             movieCards={movies}
-            savedMoviesPage={false}
             isNotFound={isNotFound}
             isErrorServer={isErrorServer}
             onSaveMoviesCard={onSaveMoviesCard}
+            onDeleteMoviesCard={onDeleteMoviesCard}
+            pageSavedMovies={false}
           />
         )}
       </div>

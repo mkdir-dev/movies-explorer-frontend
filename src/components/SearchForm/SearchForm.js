@@ -12,7 +12,7 @@ export default function SearchForm({
   // handlePreloader,
   onSearchMoviesByValue, // прописать в корневом файле стейт
   // onSearchSavedMoviesByValue, // прописать в корневом файле стейт
-  savedMoviesPage, // прописать в корневом файле стейт
+  pageSavedMovies, // прописать в корневом файле стейт
 }) {
   // стейт значения в строке поиска
   const [searchValue, setSearchValue] = useState('');
@@ -48,7 +48,7 @@ export default function SearchForm({
       <div className="search-form__wrapper">
         <form
           className="search-form__container"
-          onSubmit={!savedMoviesPage ? handleSearchMovies : handleSearchSavedMovies}
+          onSubmit={!pageSavedMovies ? handleSearchMovies : handleSearchSavedMovies}
         >
           <img
             src={searchIcon}

@@ -153,6 +153,23 @@ export default function App() {
       });
   };
 
+  const handleDeleteMoviesCard = (movieId) => {
+    const token = localStorage.getItem('token');
+    console.log(movieId);
+    MainApi.deleteMovie(token, movieId)
+      .then(() => {
+        const newSavedMovies = isSavedMovies.filter(
+          (deleteMovie) => deleteMovie._id !== movieId,
+        );
+        // console.log(newSavedMovies);
+        setSavedMovies(newSavedMovies);
+        localStorage.setItem('savedMovies', JSON.stringify(newSavedMovies));
+      })
+      .catch((err) => {
+        console.log(`Не удалось удалить фильм. Ошибка: ${err}.`);
+      });
+  };
+
   // eslint-disable-next-line no-shadow
   const handleFilteredMovies = (movies, keyword) => {
     // фильтрация фильмов по ключевому слову
@@ -318,6 +335,7 @@ export default function App() {
                 isNotFound={isNotFound}
                 isErrorServer={isErrorServer}
                 onSaveMoviesCard={handleSaveMoviesCard}
+                onDeleteMoviesCard={handleDeleteMoviesCard}
               />
             </Route>
 
