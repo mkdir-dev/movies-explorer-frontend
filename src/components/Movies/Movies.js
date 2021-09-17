@@ -19,6 +19,7 @@ export default function Movies({
   onSearchMoviesByValue,
   isNotFound,
   isErrorServer,
+  onSaveMoviesCard,
 }) {
   // если нет данных, то сказать об этом
   // onSearchMoviesByValue={onSearchMoviesByValue}
@@ -40,6 +41,7 @@ export default function Movies({
             savedMoviesPage={false}
             isNotFound={isNotFound}
             isErrorServer={isErrorServer}
+            onSaveMoviesCard={onSaveMoviesCard}
           />
         )}
       </div>

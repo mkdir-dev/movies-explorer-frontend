@@ -3,26 +3,29 @@ import React, { useState } from 'react';
 
 import './MoviesCard.css';
 
-export default function MoviesCard({ card, deleteMoviesCard }) {
+export default function MoviesCard({
+  card,
+  onSaveMoviesCard,
+  deleteMoviesCard,
+}) {
   const [isLiked, setIsLiked] = useState(false);
 
-  /*
-    const movie = {
-      country: card.country,
-      director: card.director,
-      duration: card.duration,
-      year: card.year,
-      description: card.description,
-      image: `https://api.nomoreparties.co${card.image?.url}`,
-      trailer: card?.trailerLink,
-      nameRU: card.nameRU,
-      nameEN: card.nameEN,
-      thumbnail: `https://api.nomoreparties.co${card.image?.url}`,
-      movieId: card.id,
-    };
-  */
+  const movie = {
+    country: card.country || 'Страна не указана',
+    director: card.director || 'Режиссер не указан',
+    duration: card.duration,
+    year: card.year || 'Год не указан',
+    description: card.description || 'Описание не указано',
+    image: `https://api.nomoreparties.co${card.image.url}`,
+    trailer: card.trailerLink || 'https://youtube.ru',
+    nameRU: card.nameRU || 'Название не указано',
+    nameEN: card.nameEN || 'Title not specified',
+    thumbnail: `https://api.nomoreparties.co${card.image.url}`,
+    movieId: card.id,
+  };
 
   const handleLikeClick = () => {
+    onSaveMoviesCard(movie);
     setIsLiked(!isLiked);
   };
 
@@ -34,8 +37,12 @@ export default function MoviesCard({ card, deleteMoviesCard }) {
     <li className="movies-card">
       <div className="movies-card__wrapper">
         <div className="movies-card__info">
-          <h3 className="movies-card__title">{card.nameRU}</h3>
-          <p className="movies-card__time">{`${Math.trunc(card.duration / 60)}ч ${card.duration % 60}м`}</p>
+          <h3 className="movies-card__title">
+            {card.nameRU}
+          </h3>
+          <p className="movies-card__time">
+            {`${Math.trunc(card.duration / 60)}ч ${card.duration % 60}м`}
+          </p>
         </div>
         <button
           className={`

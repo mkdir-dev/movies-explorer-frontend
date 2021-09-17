@@ -1,5 +1,4 @@
 export const BASE_URL = 'https://api.mesto-mkdirdev.nomoredomains.rocks';
-// export const BASE_URL = 'localhost:3000';
 
 const headers = {
   Accept: 'application/json',
@@ -66,7 +65,19 @@ export const saveMovie = (token, movie) => fetch(`${BASE_URL}/movies`, {
     ...headers,
     Authorization: `Bearer ${token}`,
   },
-  body: JSON.stringify(movie),
+  body: JSON.stringify({
+    country: movie.country,
+    director: movie.director,
+    duration: movie.duration,
+    year: movie.year,
+    description: movie.description,
+    image: movie.image,
+    trailer: movie.trailer,
+    nameRU: movie.nameRU,
+    nameEN: movie.nameEN,
+    thumbnail: movie.thumbnail,
+    movieId: movie.movieId,
+  }),
 })
   .then((res) => fixPromise(res));
 

@@ -6,6 +6,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 
 export default function MoviesCardList({
   movieCards,
+  onSaveMoviesCard,
   deleteMoviesCard,
   isNotFound,
   isErrorServer,
@@ -58,6 +59,7 @@ export default function MoviesCardList({
           <MoviesCard
             card={card}
             key={card.id}
+            onSaveMoviesCard={onSaveMoviesCard}
             deleteMoviesCard={deleteMoviesCard}
           />
         ))}

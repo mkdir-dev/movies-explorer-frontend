@@ -136,6 +136,23 @@ export default function App() {
       });
   };
 
+  const [isSavedMovies, setSavedMovies] = useState([]);
+
+  const handleSaveMoviesCard = (movie) => {
+    const token = localStorage.getItem('token');
+    MainApi.saveMovie(token, movie)
+      .then((savedMovie) => {
+        localStorage.setItem(
+          'savedMovies',
+          JSON.stringify([savedMovie, ...isSavedMovies]),
+        );
+        setSavedMovies([savedMovie, ...isSavedMovies]);
+      })
+      .catch((err) => {
+        console.log(`Не удалось сохранить фильм. Ошибка: ${err}.`);
+      });
+  };
+
   // eslint-disable-next-line no-shadow
   const handleFilteredMovies = (movies, keyword) => {
     // фильтрация фильмов по ключевому слову
@@ -300,6 +317,7 @@ export default function App() {
                 onSearchMoviesByValue={handleSearchMovies}
                 isNotFound={isNotFound}
                 isErrorServer={isErrorServer}
+                onSaveMoviesCard={handleSaveMoviesCard}
               />
             </Route>
 
