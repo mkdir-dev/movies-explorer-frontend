@@ -7,7 +7,7 @@ import Preloader from '../Preloader/Preloader';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 export default function Movies({
-  checkboxOn, handleToggleCheckbox, deleteMoviesCard, movies,
+  checkboxOn, handleToggleCheckbox, deleteMoviesCard, movies, savedMovies, /* isLiked, */
 }) {
   const [isLoading, setLoading] = useState(false);
 
@@ -33,6 +33,8 @@ export default function Movies({
             movieCards={movies}
             deleteMoviesCard={deleteMoviesCard}
             pageSavedMovies={true}
+            savedMovies={savedMovies}
+            // isLiked={isLiked}
           />
         )}
       </div>

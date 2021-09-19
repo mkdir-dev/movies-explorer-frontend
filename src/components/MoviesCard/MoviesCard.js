@@ -10,6 +10,8 @@ export default function MoviesCard({
   onDeleteMoviesCard,
   pageSavedMovies,
   isLikedMovies,
+  // savedMovies,
+  // isLiked,
 }) {
   const [isLiked, setIsLiked] = useState(false);
 
@@ -24,34 +26,48 @@ export default function MoviesCard({
     nameRU: card.nameRU || 'Название не указано',
     nameEN: card.nameEN || 'Title not specified',
     thumbnail: `https://api.nomoreparties.co${card.image?.url}`,
-    movieId: card.id,
+    movieId: card.id, // pageSavedMovies ? card._id : card.id,
   };
+
+  // console.log(savedMovies);
 
   const parseSavedMovies = JSON.parse(
     localStorage.getItem('savedMovies'),
   );
 
+  // console.log(parseSavedMovies);
+
   const currentMovie = parseSavedMovies.find(
     (movie) => movie.nameRU === card.nameRU,
   );
 
-  const handleLikeClick = () => {
-    onSaveMoviesCard(movie);
-    setIsLiked(true);
-  };
+  console.log(onSaveMoviesCard);
 
-  const handleDeleteMovie = () => {
-    onDeleteMoviesCard(card._id)
-      // eslint-disable-next-line promise/always-return
-      .then(() => {
-        setIsLiked(false);
-      })
+  const handleLikeClick = () => {
+    console.log(movie);
+    onSaveMoviesCard(movie)
+      .then(() => setIsLiked(true))
       .catch((err) => console.log(err));
   };
 
+  const handleDeleteMovie = () => {
+    console.log(movie);
+    // console.log(movie);
+    // onDeleteMoviesCard(card._id);
+    // setIsLiked(false);
+  };
+
+  /*
+        .then(() => {
+          setIsLiked(false);
+        })
+        .catch((err) => console.log(err));
+  */
+
   const handleDislikeClick = () => {
+    // console.log(currentMovie);
     onDeleteMoviesCard(currentMovie._id);
-    setIsLiked(false);
+    // setIsLiked(false);
   };
 
   useEffect(() => {

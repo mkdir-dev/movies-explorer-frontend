@@ -22,8 +22,8 @@ export default function Movies({
   isErrorServer,
   onSaveMoviesCard,
   onDeleteMoviesCard,
+  // isLiked,
 }) {
-  console.log(savedMovies);
   const likedMovies = savedMovies.map((movie) => movie.movieId);
   return (
     <section className="movies">
@@ -45,6 +45,7 @@ export default function Movies({
             onDeleteMoviesCard={onDeleteMoviesCard}
             pageSavedMovies={false}
             isLikedMovies={likedMovies}
+            // isLiked={isLiked}
           />
         )}
       </div>

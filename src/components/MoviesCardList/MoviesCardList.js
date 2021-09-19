@@ -14,6 +14,7 @@ export default function MoviesCardList({
   isErrorServer,
   pageSavedMovies,
   isLikedMovies,
+  // isLiked,
 }) {
   // const likedMovies = savedMovies.map((movie) => movie.movieId);
   const windowWidth = window.innerWidth;
@@ -76,7 +77,8 @@ export default function MoviesCardList({
             onDeleteMoviesCard={onDeleteMoviesCard}
             pageSavedMovies={pageSavedMovies}
             savedMovies={savedMovies}
-            isLikedMovies={isLikedMovies.includes(card.id)}
+            isLikedMovies={isLikedMovies?.includes(card.id)}
+            // isLiked={isLiked}
           />
         ))}
       </ul>

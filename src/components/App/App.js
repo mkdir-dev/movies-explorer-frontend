@@ -123,6 +123,8 @@ export default function App() {
       });
   };
 
+  // const [isLiked, setIsLiked] = useState(false);
+
   const handleSaveMoviesCard = (movie) => {
     const token = localStorage.getItem('token');
     MainApi.saveMovie(token, movie)
@@ -132,6 +134,7 @@ export default function App() {
           JSON.stringify([savedMovie, ...savedMovies]),
         );
         setSavedMovies([savedMovie, ...savedMovies]);
+        console.log(savedMovie);
       })
       .catch((err) => {
         console.log(`Не удалось сохранить фильм. Ошибка: ${err}.`);
@@ -140,12 +143,13 @@ export default function App() {
 
   const handleDeleteMoviesCard = (movieId) => {
     const token = localStorage.getItem('token');
-    // console.log(movieId);
+    console.log(movieId);
     MainApi.deleteMovie(token, movieId)
       .then(() => {
         const newSavedMovies = savedMovies.filter(
           (deleteMovie) => deleteMovie._id !== movieId,
         );
+        // console.log(newSavedMovies);
         setSavedMovies(newSavedMovies);
         localStorage.setItem('savedMovies', JSON.stringify(newSavedMovies));
       })
@@ -285,17 +289,17 @@ export default function App() {
         MainApi.getSavedMovies(token),
       ])
         .then(([userInfo, movies]) => {
-          console.log(movies);
+          // console.log(movies);
           setCurrentUser(userInfo);
           localStorage.setItem('savedMovies',
             JSON.stringify([...savedMovies, movies]));
           setSavedMovies(...savedMovies, movies);
           // console.log(movies);
-          console.log(savedMovies);
+          // console.log(savedMovies);
           // положить в стейт результат поиска
           setMovies(resSearchMovies);
           // console.log(resSearchMovies);
-          console.log(movies);
+          // console.log(movies);
         })
         .catch((err) => {
           console.log(`Данные с сервера не получены. Ошибка: ${err}.`);
@@ -314,6 +318,16 @@ export default function App() {
         console.log(`Данные с сервера не получены. Ошибка: ${err}.`);
       });
   }, [location]);
+
+  /*
+    useEffect(() => {
+      if (isLiked) {
+        setIsLiked(true);
+      } else {
+        setIsLiked(false);
+      }
+    }, [isLiked]);
+  */
 
   return (
     <CurrentUserContext.Provider
@@ -365,6 +379,7 @@ export default function App() {
                 isErrorServer={isErrorServer}
                 onSaveMoviesCard={handleSaveMoviesCard}
                 onDeleteMoviesCard={handleDeleteMoviesCard}
+              // isLiked={isLiked}
               />
             </Route>
 
@@ -373,7 +388,9 @@ export default function App() {
                 checkboxOn={checkboxValue}
                 handleToggleCheckbox={handleToggleCheckbox}
                 movies={savedMovies}
+                savedMovies={savedMovies}
                 deleteMoviesCard={isDeleteMoviesCard}
+              // isLiked={isLiked}
               />
             </Route>
 
