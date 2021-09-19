@@ -127,15 +127,16 @@ export default function App() {
 
   const handleSaveMoviesCard = (movie) => {
     const token = localStorage.getItem('token');
-    MainApi.saveMovie(token, movie)
+    return MainApi.saveMovie(token, movie)
       .then((savedMovie) => {
         localStorage.setItem(
           'savedMovies',
           JSON.stringify([savedMovie, ...savedMovies]),
         );
         setSavedMovies([savedMovie, ...savedMovies]);
-        console.log(savedMovie);
+        // return movie;
       })
+      .then((res) => res)
       .catch((err) => {
         console.log(`Не удалось сохранить фильм. Ошибка: ${err}.`);
       });
@@ -144,7 +145,7 @@ export default function App() {
   const handleDeleteMoviesCard = (movieId) => {
     const token = localStorage.getItem('token');
     console.log(movieId);
-    MainApi.deleteMovie(token, movieId)
+    return MainApi.deleteMovie(token, movieId)
       .then(() => {
         const newSavedMovies = savedMovies.filter(
           (deleteMovie) => deleteMovie._id !== movieId,
@@ -379,7 +380,6 @@ export default function App() {
                 isErrorServer={isErrorServer}
                 onSaveMoviesCard={handleSaveMoviesCard}
                 onDeleteMoviesCard={handleDeleteMoviesCard}
-              // isLiked={isLiked}
               />
             </Route>
 
@@ -390,7 +390,7 @@ export default function App() {
                 movies={savedMovies}
                 savedMovies={savedMovies}
                 deleteMoviesCard={isDeleteMoviesCard}
-              // isLiked={isLiked}
+                onDeleteMoviesCard={handleDeleteMoviesCard}
               />
             </Route>
 

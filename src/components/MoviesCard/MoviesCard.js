@@ -3,15 +3,13 @@
 import React, { useState, useEffect } from 'react';
 
 import './MoviesCard.css';
-// savedMovies
+
 export default function MoviesCard({
   card,
   onSaveMoviesCard,
   onDeleteMoviesCard,
   pageSavedMovies,
   isLikedMovies,
-  // savedMovies,
-  // isLiked,
 }) {
   const [isLiked, setIsLiked] = useState(false);
 
@@ -26,48 +24,33 @@ export default function MoviesCard({
     nameRU: card.nameRU || 'Название не указано',
     nameEN: card.nameEN || 'Title not specified',
     thumbnail: `https://api.nomoreparties.co${card.image?.url}`,
-    movieId: card.id, // pageSavedMovies ? card._id : card.id,
+    movieId: card.id,
   };
-
-  // console.log(savedMovies);
 
   const parseSavedMovies = JSON.parse(
     localStorage.getItem('savedMovies'),
   );
 
-  // console.log(parseSavedMovies);
-
   const currentMovie = parseSavedMovies.find(
     (movie) => movie.nameRU === card.nameRU,
   );
 
-  console.log(onSaveMoviesCard);
-
-  const handleLikeClick = () => {
-    console.log(movie);
+  function handleLikeClick() {
     onSaveMoviesCard(movie)
       .then(() => setIsLiked(true))
       .catch((err) => console.log(err));
-  };
+  }
 
   const handleDeleteMovie = () => {
-    console.log(movie);
-    // console.log(movie);
-    // onDeleteMoviesCard(card._id);
-    // setIsLiked(false);
+    onDeleteMoviesCard(card._id)
+      .then(() => setIsLiked(false))
+      .catch((err) => console.log(err));
   };
 
-  /*
-        .then(() => {
-          setIsLiked(false);
-        })
-        .catch((err) => console.log(err));
-  */
-
   const handleDislikeClick = () => {
-    // console.log(currentMovie);
-    onDeleteMoviesCard(currentMovie._id);
-    // setIsLiked(false);
+    onDeleteMoviesCard(currentMovie._id)
+      .then(() => setIsLiked(false))
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -93,8 +76,6 @@ export default function MoviesCard({
           <button
             aria-label="Удалить"
             type="button"
-            // className={`movies-card__like ${deleteMoviesCard && 'movies-card__delete'}`}
-            // movies-card__delete
             className="movies-card__like movies-card__delete"
             onClick={handleDeleteMovie}
           />
@@ -120,7 +101,6 @@ export default function MoviesCard({
         >
           <img
             className="movies-card__image"
-            // src={`https://api.nomoreparties.co${card.image?.url}`}
             src={pageSavedMovies ? card.image : `https://api.nomoreparties.co${card.image?.url}`}
             alt={card.nameRU}
           />
@@ -129,15 +109,3 @@ export default function MoviesCard({
     </li>
   );
 }
-
-/*
-        <button
-          className={`
-          movies-card__like
-          ${isLiked && 'movies-card__like_active'}
-          `}
-          type="button"
-          aria-label="Лайк"
-          onClick={isLiked ? handleDislikeClick : handleLikeClick}
-        />
-*/

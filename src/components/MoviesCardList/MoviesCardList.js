@@ -14,9 +14,7 @@ export default function MoviesCardList({
   isErrorServer,
   pageSavedMovies,
   isLikedMovies,
-  // isLiked,
 }) {
-  // const likedMovies = savedMovies.map((movie) => movie.movieId);
   const windowWidth = window.innerWidth;
   const [isDisplayWidth, setDisplayWidth] = useState(windowWidth);
   const [moviesCount, setMoviesCount] = useState(0);
@@ -44,8 +42,6 @@ export default function MoviesCardList({
     return () => window.removeEventListener('resize', callbackWidth);
   }, [isDisplayWidth, windowWidth]);
 
-  // console.log(isLikedMovies);
-
   return (
     <section className="movies-card-list">
       <span
@@ -72,13 +68,12 @@ export default function MoviesCardList({
         {movieCards?.slice(0, moviesCount).map((card) => (
           <MoviesCard
             card={card}
-            key={pageSavedMovies ? card.movieId : card.id}
+            key={pageSavedMovies ? card.id : card.movieId}
             onSaveMoviesCard={onSaveMoviesCard}
             onDeleteMoviesCard={onDeleteMoviesCard}
             pageSavedMovies={pageSavedMovies}
             savedMovies={savedMovies}
             isLikedMovies={isLikedMovies?.includes(card.id)}
-            // isLiked={isLiked}
           />
         ))}
       </ul>
