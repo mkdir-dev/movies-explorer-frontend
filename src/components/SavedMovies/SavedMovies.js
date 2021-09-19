@@ -1,12 +1,14 @@
+/* eslint-disable react/jsx-boolean-value */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 
 import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import { infoMoviesLiked } from '../../utils/constants';
 
-export default function Movies({ checkboxOn, handleToggleCheckbox, deleteMoviesCard }) {
+export default function Movies({
+  checkboxOn, handleToggleCheckbox, deleteMoviesCard, movies,
+}) {
   const [isLoading, setLoading] = useState(false);
 
   // сделать показ прелоадера при нажатии на кнопку поиска
@@ -28,8 +30,9 @@ export default function Movies({ checkboxOn, handleToggleCheckbox, deleteMoviesC
           <Preloader />
         ) : (
           <MoviesCardList
-            movieCards={infoMoviesLiked}
+            movieCards={movies}
             deleteMoviesCard={deleteMoviesCard}
+            pageSavedMovies={true}
           />
         )}
       </div>

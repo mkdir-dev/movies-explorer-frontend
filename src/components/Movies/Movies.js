@@ -16,12 +16,15 @@ export default function Movies({
   handleToggleCheckbox,
   isLoading,
   movies,
+  savedMovies,
   onSearchMoviesByValue,
   isNotFound,
   isErrorServer,
   onSaveMoviesCard,
   onDeleteMoviesCard,
 }) {
+  console.log(savedMovies);
+  const likedMovies = savedMovies.map((movie) => movie.movieId);
   return (
     <section className="movies">
       <div className="container">
@@ -29,18 +32,19 @@ export default function Movies({
           checkboxOn={checkboxOn}
           handleToggleCheckbox={handleToggleCheckbox}
           onSearchMoviesByValue={onSearchMoviesByValue}
-          pageSavedMovies={false}
         />
         {isLoading ? (
           <Preloader />
         ) : (
           <MoviesCardList
             movieCards={movies}
+            savedMovies={savedMovies}
             isNotFound={isNotFound}
             isErrorServer={isErrorServer}
             onSaveMoviesCard={onSaveMoviesCard}
             onDeleteMoviesCard={onDeleteMoviesCard}
             pageSavedMovies={false}
+            isLikedMovies={likedMovies}
           />
         )}
       </div>

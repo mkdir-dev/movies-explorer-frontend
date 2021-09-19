@@ -7,13 +7,15 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 
 export default function MoviesCardList({
   movieCards,
+  savedMovies,
   onSaveMoviesCard,
-  // deleteMoviesCard,
   onDeleteMoviesCard,
   isNotFound,
   isErrorServer,
-  // pageSavedMovies,
+  pageSavedMovies,
+  isLikedMovies,
 }) {
+  // const likedMovies = savedMovies.map((movie) => movie.movieId);
   const windowWidth = window.innerWidth;
   const [isDisplayWidth, setDisplayWidth] = useState(windowWidth);
   const [moviesCount, setMoviesCount] = useState(0);
@@ -41,6 +43,8 @@ export default function MoviesCardList({
     return () => window.removeEventListener('resize', callbackWidth);
   }, [isDisplayWidth, windowWidth]);
 
+  // console.log(isLikedMovies);
+
   return (
     <section className="movies-card-list">
       <span
@@ -57,25 +61,38 @@ export default function MoviesCardList({
         проблема с соединением или сервер недоступен.
         Подождите немного и попробуйте ещё раз
       </span>
+      <span
+        className={`movies-card-list__message
+          ${pageSavedMovies && movieCards.length === 0 ? '' : 'movies-card-list__hide'} `}
+      >
+        Сохраненные фильмы отсутствуют
+      </span>
       <ul className="movies-card-list__container">
-        {movieCards.slice(0, moviesCount).map((card) => (
+        {movieCards?.slice(0, moviesCount).map((card) => (
           <MoviesCard
             card={card}
-            key={card.id}
+            key={pageSavedMovies ? card.movieId : card.id}
             onSaveMoviesCard={onSaveMoviesCard}
-            // deleteMoviesCard={deleteMoviesCard}
             onDeleteMoviesCard={onDeleteMoviesCard}
+            pageSavedMovies={pageSavedMovies}
+            savedMovies={savedMovies}
+            isLikedMovies={isLikedMovies.includes(card.id)}
           />
         ))}
       </ul>
-      <button
-        className={`${movieCards.length <= moviesCount
-          ? 'movies-card-list__hide' : 'movies-card-list__button'}`}
-        type="button"
-        onClick={handleMore}
-      >
-        Ещё
-      </button>
+      {!pageSavedMovies ? (
+        <button
+          className={`${movieCards?.length <= moviesCount
+            ? 'movies-card-list__hide' : 'movies-card-list__button'}`}
+          type="button"
+          onClick={handleMore}
+        >
+          Ещё
+        </button>
+      ) : (
+        <button type="button" aria-label="Лайк" className="hide-section" />
+      )}
+
     </section>
   );
 }

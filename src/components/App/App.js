@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-shadow */
 /* eslint-disable promise/always-return */
 import React, { useState, useEffect } from 'react';
 import {
@@ -46,6 +48,8 @@ export default function App() {
   const [checkboxValue, setCheckboxValue] = useState(false);
   // стейт сообщения об ошибке API
   const [isMessageErrorAPI, setMessageErrorAPI] = useState('');
+  // стейт сохраненных фильмов
+  const [savedMovies, setSavedMovies] = useState([]);
 
   const checkToken = () => {
     const token = localStorage.getItem('token');
@@ -62,23 +66,6 @@ export default function App() {
       console.log('Нет токена - потерялся');
     }
   };
-
-  useEffect(() => {
-    checkToken();
-  }, []);
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (loggedIn) {
-      MainApi.getUserInfo(token)
-        .then((userInfo) => {
-          setCurrentUser(userInfo);
-        })
-        .catch((err) => {
-          console.log(`Не удалось получить данные пользователя. Ошибка: ${err}.`);
-        });
-    }
-  }, [loggedIn]);
 
   const handleToggleCheckbox = () => {
     setCheckboxValue(!checkboxValue);
@@ -136,17 +123,15 @@ export default function App() {
       });
   };
 
-  const [isSavedMovies, setSavedMovies] = useState([]);
-
   const handleSaveMoviesCard = (movie) => {
     const token = localStorage.getItem('token');
     MainApi.saveMovie(token, movie)
       .then((savedMovie) => {
         localStorage.setItem(
           'savedMovies',
-          JSON.stringify([savedMovie, ...isSavedMovies]),
+          JSON.stringify([savedMovie, ...savedMovies]),
         );
-        setSavedMovies([savedMovie, ...isSavedMovies]);
+        setSavedMovies([savedMovie, ...savedMovies]);
       })
       .catch((err) => {
         console.log(`Не удалось сохранить фильм. Ошибка: ${err}.`);
@@ -158,10 +143,9 @@ export default function App() {
     // console.log(movieId);
     MainApi.deleteMovie(token, movieId)
       .then(() => {
-        const newSavedMovies = isSavedMovies.filter(
+        const newSavedMovies = savedMovies.filter(
           (deleteMovie) => deleteMovie._id !== movieId,
         );
-        // console.log(newSavedMovies);
         setSavedMovies(newSavedMovies);
         localStorage.setItem('savedMovies', JSON.stringify(newSavedMovies));
       })
@@ -170,7 +154,6 @@ export default function App() {
       });
   };
 
-  // eslint-disable-next-line no-shadow
   const handleFilteredMovies = (movies, keyword) => {
     // фильтрация фильмов по ключевому слову
     const filteredMoviesByKeyword = movies
@@ -287,6 +270,51 @@ export default function App() {
     }
   }, [location]);
 
+  useEffect(() => {
+    checkToken();
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    // положить в хранилище результат поиска
+    const resSearchMovies = JSON.parse(localStorage.getItem('movies'));
+
+    if (loggedIn) {
+      Promise.all([
+        MainApi.getUserInfo(token),
+        MainApi.getSavedMovies(token),
+      ])
+        .then(([userInfo, movies]) => {
+          console.log(movies);
+          setCurrentUser(userInfo);
+          localStorage.setItem('savedMovies',
+            JSON.stringify([...savedMovies, movies]));
+          setSavedMovies(...savedMovies, movies);
+          // console.log(movies);
+          console.log(savedMovies);
+          // положить в стейт результат поиска
+          setMovies(resSearchMovies);
+          // console.log(resSearchMovies);
+          console.log(movies);
+        })
+        .catch((err) => {
+          console.log(`Данные с сервера не получены. Ошибка: ${err}.`);
+        });
+    }
+  }, [loggedIn]);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    MainApi.getSavedMovies(token)
+      .then((res) => {
+        setSavedMovies(res);
+      })
+      .catch((err) => {
+        console.log(`Данные с сервера не получены. Ошибка: ${err}.`);
+      });
+  }, [location]);
+
   return (
     <CurrentUserContext.Provider
       value={currentUser}
@@ -331,6 +359,7 @@ export default function App() {
                 handleToggleCheckbox={handleToggleCheckbox}
                 isLoading={isLoading}
                 movies={movies}
+                savedMovies={savedMovies}
                 onSearchMoviesByValue={handleSearchMovies}
                 isNotFound={isNotFound}
                 isErrorServer={isErrorServer}
@@ -343,6 +372,7 @@ export default function App() {
               <SavedMovies
                 checkboxOn={checkboxValue}
                 handleToggleCheckbox={handleToggleCheckbox}
+                movies={savedMovies}
                 deleteMoviesCard={isDeleteMoviesCard}
               />
             </Route>
