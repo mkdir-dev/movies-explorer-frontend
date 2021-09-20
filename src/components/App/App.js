@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-shadow */
 /* eslint-disable promise/always-return */
@@ -316,8 +317,11 @@ export default function App() {
         MainApi.getSavedMovies(token),
       ])
         .then(([userInfo, movies]) => {
+          // отфильтровать сохраненные фильмы пользователя
+          const userMovies = movies.filter((movie) => movie.owner === userInfo._id);
+
           setCurrentUser(userInfo);
-          setSavedMovies(movies);
+          setSavedMovies(userMovies);
 
           if ('movies' in localStorage) {
             setMovies(JSON.parse(localStorage.getItem('movies')));
