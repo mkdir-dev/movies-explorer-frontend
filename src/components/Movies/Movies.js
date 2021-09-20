@@ -19,6 +19,7 @@ export default function Movies({
   onSaveMoviesCard,
   onDeleteMoviesCard,
 }) {
+  // console.log(savedMovies);
   const likedMovies = savedMovies.map((movie) => movie.movieId);
   return (
     <section className="movies">

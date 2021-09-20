@@ -285,7 +285,6 @@ export default function App() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     // положить в хранилище результат поиска
-    const resSearchMovies = JSON.parse(localStorage.getItem('movies'));
 
     if (loggedIn) {
       Promise.all([
@@ -297,8 +296,12 @@ export default function App() {
           localStorage.setItem('savedMovies',
             JSON.stringify([...savedMovies, movies]));
           setSavedMovies(...savedMovies, movies);
-          // положить в стейт результат поиска
-          setMovies(resSearchMovies);
+
+          if ('movies' in localStorage) {
+            setMovies(JSON.parse(localStorage.getItem('movies')));
+          } else {
+            setMovies([]);
+          }
         })
         .catch((err) => {
           console.log(`Данные с сервера не получены. Ошибка: ${err}.`);
@@ -307,17 +310,8 @@ export default function App() {
   }, [loggedIn]);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-
-    MainApi.getSavedMovies(token)
-      .then((res) => {
-        console.log(res);
-        setSavedMovies(res);
-      })
-      .catch((err) => {
-        console.log(`Данные с сервера не получены. Ошибка: ${err}.`);
-      });
-  }, [location]);
+    localStorage.setItem('movies', JSON.stringify(savedMovies));
+  }, [savedMovies]);
 
   return (
     <CurrentUserContext.Provider
