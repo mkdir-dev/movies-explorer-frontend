@@ -27,19 +27,17 @@ export default function MoviesCard({
     movieId: card.id,
   };
 
-  const parseSavedMovies = JSON.parse(
-    localStorage.getItem('savedMovies'),
-  );
+  const parseSavedMovies = JSON.parse(localStorage.getItem('savedMovies'));
 
   const currentMovie = parseSavedMovies.find(
     (movie) => movie.nameRU === card.nameRU,
   );
 
-  function handleLikeClick() {
+  const handleLikeClick = () => {
     onSaveMoviesCard(movie)
       .then(() => setIsLiked(true))
       .catch((err) => console.log(err));
-  }
+  };
 
   const handleDeleteMovie = () => {
     onDeleteMoviesCard(card._id)

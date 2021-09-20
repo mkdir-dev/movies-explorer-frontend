@@ -330,6 +330,9 @@ export default function App() {
           } else {
             setMovies([]);
           }
+          if (!('savedMovies' in localStorage)) {
+            localStorage.setItem('savedMovies', JSON.stringify([]));
+          }
         })
         .catch((err) => {
           console.log(`Данные с сервера не получены. Ошибка: ${err}.`);
