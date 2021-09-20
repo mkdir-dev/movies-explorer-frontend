@@ -309,7 +309,6 @@ export default function App() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    // положить в хранилище результат поиска
 
     if (loggedIn) {
       Promise.all([
@@ -318,9 +317,7 @@ export default function App() {
       ])
         .then(([userInfo, movies]) => {
           setCurrentUser(userInfo);
-          localStorage.setItem('savedMovies',
-            JSON.stringify([...savedMovies, movies]));
-          setSavedMovies(...savedMovies, movies);
+          setSavedMovies(movies);
 
           if ('movies' in localStorage) {
             setMovies(JSON.parse(localStorage.getItem('movies')));
