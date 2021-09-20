@@ -4,7 +4,9 @@ import React, { useEffect } from 'react';
 import FormAuth from '../FormAuth/FormAuth';
 import useValidForm from '../../hooks/useValidForm';
 
-export default function Register({ onRegister, isMessageErrorAPI }) {
+export default function Register({
+  onRegister, isMessageErrorAPI, sendingData, messageSendingData,
+}) {
   const {
     values, errors, isValidForm, handleChange, resetForm,
   } = useValidForm();
@@ -26,7 +28,7 @@ export default function Register({ onRegister, isMessageErrorAPI }) {
     <FormAuth
       linkHistory="/signin"
       title="Добро пожаловать!"
-      buttonText="Зарегистрироваться"
+      buttonText={sendingData ? messageSendingData : 'Зарегистрироваться'}
       typeButton="signup"
       question="Уже зарегистрированы? &nbsp;"
       link="/signin"

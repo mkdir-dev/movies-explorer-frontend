@@ -4,7 +4,9 @@ import React, { useEffect } from 'react';
 import FormAuth from '../FormAuth/FormAuth';
 import useValidForm from '../../hooks/useValidForm';
 
-export default function Login({ onLogin, isMessageErrorAPI }) {
+export default function Login({
+  onLogin, isMessageErrorAPI, sendingData, messageSendingData,
+}) {
   const {
     values, errors, isValidForm, handleChange, resetForm,
   } = useValidForm();
@@ -26,7 +28,7 @@ export default function Login({ onLogin, isMessageErrorAPI }) {
       onLogin={onLogin}
       linkHistory="/"
       title="Рады видеть!"
-      buttonText="Войти"
+      buttonText={sendingData ? messageSendingData : 'Войти'}
       typeButton="signin"
       question="Еще не зарегистрированы? &nbsp;"
       link="/signup"

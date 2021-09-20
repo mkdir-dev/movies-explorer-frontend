@@ -85,30 +85,38 @@ export default function App() {
 
   // вход пользователя
   const handleLogin = (email, password) => {
+    setSendingData(true);
+    setMessageSendingData('Cохранение...');
     MainApi.authorization(email, password)
       .then((res) => {
         // сбросить текст, иначе останется
         setMessageErrorAPI('');
         localStorage.setItem('token', res.token);
         setLoggedIn(true);
+        setSendingData(false);
         history.push('/movies');
       })
       .catch((err) => {
         console.log(`Не удалось войти. Ошибка: ${err}.`);
+        setSendingData(false);
         setMessageErrorAPI('Что-то пошло не так...');
       });
   };
 
   // регистрация пользователя
   const handleRegister = (name, email, password) => {
+    setSendingData(true);
+    setMessageSendingData('Cохранение...');
     MainApi.register(name, email, password)
       .then(() => {
         // сбросить текст, иначе останется
         setMessageErrorAPI('');
+        setSendingData(false);
         handleLogin(name, email, password);
       })
       .catch((err) => {
         console.log(`Не удалось зарегистрироваться. Ошибка: ${err}.`);
+        setSendingData(false);
         setMessageErrorAPI('Что-то пошло не так...');
       });
   };
@@ -351,6 +359,8 @@ export default function App() {
               <Register
                 onRegister={handleRegister}
                 isMessageErrorAPI={isMessageErrorAPI}
+                sendingData={sendingData}
+                messageSendingData={messageSendingData}
               />
             </Route>
 
@@ -358,6 +368,8 @@ export default function App() {
               <Login
                 onLogin={handleLogin}
                 isMessageErrorAPI={isMessageErrorAPI}
+                sendingData={sendingData}
+                messageSendingData={messageSendingData}
               />
             </Route>
 
