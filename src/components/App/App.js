@@ -50,6 +50,10 @@ export default function App() {
   const [isMessageErrorAPI, setMessageErrorAPI] = useState('');
   // стейт сохраненных фильмов
   const [savedMovies, setSavedMovies] = useState([]);
+  // стейт состояния отправки данных на сервер
+  const [sendingData, setSendingData] = useState(false);
+  // стейт сообщений отправки данных на сервер
+  const [messageSendingData, setMessageSendingData] = useState('');
 
   const checkToken = () => {
     const token = localStorage.getItem('token');
@@ -115,10 +119,12 @@ export default function App() {
     MainApi.editUserInfo(token, name, email)
       .then((res) => {
         setCurrentUser(res);
-        console.log('Данные пользователя изменены успешно');
+        setSendingData(true);
+        setMessageSendingData('Данные пользователя успешно изменены');
       })
-      .catch((err) => {
-        console.log(`Не удалось изменить данные пользователя. Ошибка: ${err}.`);
+      .catch(() => {
+        setSendingData(false);
+        setMessageSendingData('Не удалось изменить данные пользователя');
       });
   };
 
@@ -276,6 +282,17 @@ export default function App() {
     } else {
       setBackgroundHeader(false);
     }
+
+    // очистить стейт сообщения при переходе на страницу
+    if (location.pathname === '/movies'
+      || location.pathname === '/saved-movies'
+      || location.pathname === '/profile'
+      || location.pathname === '/signup'
+      || location.pathname === '/signin'
+      || location.pathname === '/') {
+      setMessageSendingData('');
+      setMessageErrorAPI('');
+    }
   }, [location]);
 
   useEffect(() => {
@@ -348,6 +365,8 @@ export default function App() {
               <Profile
                 signOut={signOut}
                 onEditUserInfo={handleEditUserInfo}
+                sendingData={sendingData}
+                messageSendingData={messageSendingData}
               />
             </Route>
 

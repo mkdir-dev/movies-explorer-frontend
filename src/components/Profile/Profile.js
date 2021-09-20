@@ -4,7 +4,9 @@ import React, { useEffect, useContext } from 'react';
 import useValidForm from '../../hooks/useValidForm';
 import CurrentUserContext from '../../context/CurrentUserContext';
 
-export default function Profile({ signOut, onEditUserInfo }) {
+export default function Profile({
+  signOut, onEditUserInfo, sendingData, messageSendingData,
+}) {
   const {
     values, setValues, errors, isValidForm, handleChange, resetForm,
   } = useValidForm();
@@ -90,6 +92,12 @@ export default function Profile({ signOut, onEditUserInfo }) {
             </span>
           </label>
 
+          <span className={`auth-form__api-sendingData
+              ${sendingData ? 'auth-form__api-sendingData_type_success' : 'auth-form__api-sendingData_type_error'}
+            `}
+          >
+            {messageSendingData}
+          </span>
           <button
             aria-label="Редактировать"
             type="submit"

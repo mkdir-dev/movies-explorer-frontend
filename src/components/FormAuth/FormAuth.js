@@ -6,18 +6,12 @@ import './FormAuth.css';
 import Logotype from '../Logotype/Logotype';
 
 export default function FormAuth({
-  /* onLogin, */ children, /* linkHistory, */ onSubmit,
-  title, buttonText, typeButton, question,
-  link, linkText, isDisabled, isMessageErrorAPI,
+  children, onSubmit,
+  title, buttonText,
+  typeButton, question,
+  link, linkText,
+  isDisabled, isMessageErrorAPI,
 }) {
-  // const history = useHistory();
-  /*
-    function handleSubmit(evt) {
-      onLogin();
-      evt.preventDefault();
-      history.push(`${linkHistory}`);
-    }
-  */
   return (
     <section className="auth-form">
       <div className="auth-form__container">
