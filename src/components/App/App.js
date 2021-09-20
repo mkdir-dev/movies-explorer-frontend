@@ -4,10 +4,12 @@
 /* eslint-disable promise/always-return */
 import React, { useState, useEffect } from 'react';
 import {
-  Route, Switch, useLocation, useHistory,
+  Route, Switch, Redirect, useLocation, useHistory,
 } from 'react-router-dom';
 
 import './App.css';
+
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -353,64 +355,80 @@ export default function App() {
           <Switch>
 
             <Route exact path="/">
-              <Main />
+              <Main
+                loggedIn={loggedIn}
+              />
             </Route>
 
             <Route path="/signup">
-              <Register
-                onRegister={handleRegister}
-                isMessageErrorAPI={isMessageErrorAPI}
-                sendingData={sendingData}
-                messageSendingData={messageSendingData}
-              />
+              {loggedIn ? (
+                <Redirect to="/" />
+              ) : (
+                <Register
+                  onRegister={handleRegister}
+                  isMessageErrorAPI={isMessageErrorAPI}
+                  sendingData={sendingData}
+                  messageSendingData={messageSendingData}
+                />
+              )}
             </Route>
 
             <Route path="/signin">
-              <Login
-                onLogin={handleLogin}
-                isMessageErrorAPI={isMessageErrorAPI}
-                sendingData={sendingData}
-                messageSendingData={messageSendingData}
-              />
+              {loggedIn ? (
+                <Redirect to="/" />
+              ) : (
+                <Login
+                  onLogin={handleLogin}
+                  isMessageErrorAPI={isMessageErrorAPI}
+                  sendingData={sendingData}
+                  messageSendingData={messageSendingData}
+                />
+              )}
             </Route>
 
-            <Route path="/profile">
-              <Profile
-                signOut={signOut}
-                onEditUserInfo={handleEditUserInfo}
-                sendingData={sendingData}
-                messageSendingData={messageSendingData}
-              />
-            </Route>
+            <ProtectedRoute
+              exact
+              path="/profile"
+              component={Profile}
+              loggedIn={loggedIn}
+              signOut={signOut}
+              onEditUserInfo={handleEditUserInfo}
+              sendingData={sendingData}
+              messageSendingData={messageSendingData}
+            />
 
-            <Route path="/movies">
-              <Movies
-                checkboxOn={checkboxValue}
-                handleToggleCheckbox={handleToggleCheckbox}
-                isLoading={isLoading}
-                movies={movies}
-                savedMovies={savedMovies}
-                onSearchMoviesByValue={handleSearchMovies}
-                isNotFound={isNotFound}
-                isErrorServer={isErrorServer}
-                onSaveMoviesCard={handleSaveMoviesCard}
-                onDeleteMoviesCard={handleDeleteMoviesCard}
-              />
-            </Route>
+            <ProtectedRoute
+              exact
+              path="/movies"
+              component={Movies}
+              loggedIn={loggedIn}
+              checkboxOn={checkboxValue}
+              handleToggleCheckbox={handleToggleCheckbox}
+              isLoading={isLoading}
+              movies={movies}
+              savedMovies={savedMovies}
+              onSearchMoviesByValue={handleSearchMovies}
+              isNotFound={isNotFound}
+              isErrorServer={isErrorServer}
+              onSaveMoviesCard={handleSaveMoviesCard}
+              onDeleteMoviesCard={handleDeleteMoviesCard}
+            />
 
-            <Route path="/saved-movies">
-              <SavedMovies
-                checkboxOn={checkboxValue}
-                handleToggleCheckbox={handleToggleCheckbox}
-                movies={savedMovies}
-                savedMovies={savedMovies}
-                onSearchSavedMoviesByValue={handleSearchSavedMovies}
-                deleteMoviesCard={isDeleteMoviesCard}
-                onDeleteMoviesCard={handleDeleteMoviesCard}
-              />
-            </Route>
+            <ProtectedRoute
+              exact
+              path="/saved-movies"
+              component={SavedMovies}
+              loggedIn={loggedIn}
+              checkboxOn={checkboxValue}
+              handleToggleCheckbox={handleToggleCheckbox}
+              movies={savedMovies}
+              savedMovies={savedMovies}
+              onSearchSavedMoviesByValue={handleSearchSavedMovies}
+              deleteMoviesCard={isDeleteMoviesCard}
+              onDeleteMoviesCard={handleDeleteMoviesCard}
+            />
 
-            <Route path="/not-found">
+            <Route path="*">
               <NotFound />
             </Route>
 
