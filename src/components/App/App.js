@@ -57,6 +57,8 @@ export default function App() {
   const [sendingData, setSendingData] = useState(false);
   // стейт сообщений отправки данных на сервер
   const [messageSendingData, setMessageSendingData] = useState('');
+  // стейт активнивного/неактивного инпута
+  const [isDisabledInput, setDisabledInput] = useState(false);
 
   const checkToken = () => {
     const token = localStorage.getItem('token');
@@ -90,6 +92,7 @@ export default function App() {
   const handleLogin = (email, password) => {
     setSendingData(true);
     setMessageSendingData('Cохранение...');
+    setDisabledInput(true);
     MainApi.authorization(email, password)
       .then((res) => {
         // сбросить текст, иначе останется
@@ -97,10 +100,12 @@ export default function App() {
         localStorage.setItem('token', res.token);
         setLoggedIn(true);
         setSendingData(false);
+        setDisabledInput(false);
         history.push('/movies');
       })
       .catch((err) => {
         console.log(`Не удалось войти. Ошибка: ${err}.`);
+        setDisabledInput(false);
         setSendingData(false);
         setMessageErrorAPI('Что-то пошло не так...');
       });
@@ -110,15 +115,18 @@ export default function App() {
   const handleRegister = (name, email, password) => {
     setSendingData(true);
     setMessageSendingData('Cохранение...');
+    setDisabledInput(true);
     MainApi.register(name, email, password)
       .then(() => {
         // сбросить текст, иначе останется
         setMessageErrorAPI('');
         setSendingData(false);
         handleLogin(name, email, password);
+        setDisabledInput(false);
       })
       .catch((err) => {
         console.log(`Не удалось зарегистрироваться. Ошибка: ${err}.`);
+        setDisabledInput(false);
         setSendingData(false);
         setMessageErrorAPI('Что-то пошло не так...');
       });
@@ -126,15 +134,18 @@ export default function App() {
 
   // редактирование профиля
   const handleEditUserInfo = (name, email) => {
+    setDisabledInput(true);
     const token = localStorage.getItem('token');
     MainApi.editUserInfo(token, name, email)
       .then((res) => {
         setCurrentUser(res);
         setSendingData(true);
         setMessageSendingData('Данные пользователя успешно изменены');
+        setDisabledInput(false);
       })
       .catch(() => {
         setSendingData(false);
+        setDisabledInput(false);
         setMessageSendingData('Не удалось изменить данные пользователя');
       });
   };
@@ -377,6 +388,7 @@ export default function App() {
                   isMessageErrorAPI={isMessageErrorAPI}
                   sendingData={sendingData}
                   messageSendingData={messageSendingData}
+                  isDisabledInput={isDisabledInput}
                 />
               )}
             </Route>
@@ -390,6 +402,7 @@ export default function App() {
                   isMessageErrorAPI={isMessageErrorAPI}
                   sendingData={sendingData}
                   messageSendingData={messageSendingData}
+                  isDisabledInput={isDisabledInput}
                 />
               )}
             </Route>
@@ -403,6 +416,7 @@ export default function App() {
               onEditUserInfo={handleEditUserInfo}
               sendingData={sendingData}
               messageSendingData={messageSendingData}
+              isDisabledInput={isDisabledInput}
             />
 
             <ProtectedRoute

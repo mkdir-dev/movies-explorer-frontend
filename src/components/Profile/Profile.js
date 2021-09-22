@@ -5,7 +5,7 @@ import useValidForm from '../../hooks/useValidForm';
 import CurrentUserContext from '../../context/CurrentUserContext';
 
 export default function Profile({
-  signOut, onEditUserInfo, sendingData, messageSendingData,
+  signOut, onEditUserInfo, sendingData, messageSendingData, isDisabledInput,
 }) {
   const {
     values, setValues, errors, isValidForm, handleChange, resetForm,
@@ -49,7 +49,7 @@ export default function Profile({
           >
             Имя
             <input
-              className="auth-form__input auth-form__input_type_profile"
+              className={`auth-form__input auth-form__input_type_profile ${isDisabledInput ? 'auth-form__input_disabled' : ''}`}
               id="auth-input-name-profile"
               name="name"
               type="text"
@@ -60,6 +60,7 @@ export default function Profile({
               pattern="[а-яА-Яa-zA-ZёË\- ]{2,30}"
               value={values.name || ''}
               onChange={handleChange}
+              disabled={isDisabledInput}
               required
             />
             <span
@@ -75,7 +76,7 @@ export default function Profile({
           >
             E-mail
             <input
-              className="auth-form__input auth-form__input_type_profile"
+              className={`auth-form__input auth-form__input_type_profile ${isDisabledInput ? 'auth-form__input_disabled' : ''}`}
               id="auth-input-email-profile"
               name="email"
               type="email"
@@ -83,6 +84,7 @@ export default function Profile({
               minLength="5"
               value={values.email || ''}
               onChange={handleChange}
+              disabled={isDisabledInput}
               required
             />
             <span

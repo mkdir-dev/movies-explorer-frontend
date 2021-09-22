@@ -5,7 +5,7 @@ import FormAuth from '../FormAuth/FormAuth';
 import useValidForm from '../../hooks/useValidForm';
 
 export default function Login({
-  onLogin, isMessageErrorAPI, sendingData, messageSendingData,
+  onLogin, isMessageErrorAPI, sendingData, messageSendingData, isDisabledInput,
 }) {
   const {
     values, errors, isValidForm, handleChange, resetForm,
@@ -44,7 +44,7 @@ export default function Login({
       >
         E-mail
         <input
-          className="auth-form__input"
+          className={`auth-form__input ${isDisabledInput ? 'auth-form__input_disabled' : ''}`}
           id="auth-input-email"
           name="email"
           type="email"
@@ -52,6 +52,7 @@ export default function Login({
           minLength="5"
           value={values.email || ''}
           onChange={handleChange}
+          disabled={isDisabledInput}
           required
         />
         <span
@@ -67,7 +68,7 @@ export default function Login({
         Пароль
         <input
           // auth-form__input_type_error
-          className="auth-form__input"
+          className={`auth-form__input ${isDisabledInput ? 'auth-form__input_disabled' : ''}`}
           id="auth-input-password"
           name="password"
           type="password"
@@ -75,6 +76,7 @@ export default function Login({
           minLength="8"
           value={values.password || ''}
           onChange={handleChange}
+          disabled={isDisabledInput}
           required
         />
         <span

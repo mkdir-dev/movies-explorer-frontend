@@ -73,6 +73,14 @@
   line-height: 16px;
 }
 
+.auth-form__input:focus {
+  background-color: rgba(47, 47, 47, 0.7);
+}
+
+.auth-form__input_disabled {
+  color: rgba(255, 255, 255, 0.5);
+}
+
 .auth-form__input_type_profile {
   margin: 0 0 0 30px;
   padding: 17px 0 16px;
