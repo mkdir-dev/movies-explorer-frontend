@@ -313,7 +313,7 @@ export default function App() {
     const token = localStorage.getItem('token');
 
     // если есть токен в localStorage
-    // считать пользователя залогиненым
+    // считать пользователя залогиненным
     if (token) {
       setLoggedIn(true);
     }
