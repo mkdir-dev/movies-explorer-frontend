@@ -172,7 +172,6 @@ export default function App() {
 
   const handleFilteredMovies = (movies, keyword) => {
     // фильтрация фильмов по ключевому слову
-    console.log(movies);
     const filteredMoviesByKeyword = movies
       .filter((movie) => movie.nameRU.toLowerCase().includes(keyword.toLowerCase())
         || (movie.nameEN ? movie.nameEN : '').toLowerCase().includes(keyword.toLowerCase()));
@@ -312,6 +311,12 @@ export default function App() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+
+    // если есть токен в localStorage
+    // считать пользователя залогиненым
+    if (token) {
+      setLoggedIn(true);
+    }
 
     if (loggedIn) {
       Promise.all([
