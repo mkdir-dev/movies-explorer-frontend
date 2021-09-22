@@ -10,6 +10,7 @@ export default function MoviesCard({
   onDeleteMoviesCard,
   pageSavedMovies,
   isLikedMovies,
+  savedMovies,
 }) {
   const [isLiked, setIsLiked] = useState(false);
 
@@ -34,6 +35,7 @@ export default function MoviesCard({
   );
 
   const handleLikeClick = () => {
+    console.log(savedMovies);
     onSaveMoviesCard(movie)
       .then(() => setIsLiked(true))
       .catch((err) => console.log(err));
@@ -52,12 +54,12 @@ export default function MoviesCard({
   };
 
   useEffect(() => {
-    if (isLiked) {
+    if (isLiked && savedMovies) {
       setIsLiked(true);
     } else {
       setIsLiked(false);
     }
-  }, [isLiked]);
+  }, [isLiked, savedMovies]);
 
   return (
     <li className="movies-card">
