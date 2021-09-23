@@ -1,36 +1,74 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 
 import './SearchForm.css';
 import searchIcon from '../../images/search.png';
 
 import Checkbox from '../Checkbox/Checkbox';
 
-export default function SearchForm({ checkboxOn, handleToggleCheckbox, handlePreloader }) {
-  const handleSubmit = (evt) => {
+export default function SearchForm({
+  checkboxOn,
+  handleToggleCheckbox,
+  onSearchMoviesByValue,
+  onSearchSavedMoviesByValue,
+  pageSavedMovies,
+}) {
+  // стейт значения в строке поиска
+  const [searchValue, setSearchValue] = useState('');
+  const [isSearchValidity, setSearchValidity] = useState(false);
+
+  const handleChangeSearchValue = (evt) => {
+    if (!evt.target.validity) {
+      setSearchValidity(false);
+    } else {
+      setSearchValidity(true);
+    }
+
+    setSearchValue(evt.target.value);
+  };
+
+  const handleSearchMovies = (evt) => {
     evt.preventDefault();
-    handlePreloader();
+    onSearchMoviesByValue(searchValue);
+  };
+
+  const handleSearchSavedMovies = (evt) => {
+    evt.preventDefault();
+    onSearchSavedMoviesByValue(searchValue);
   };
 
   return (
     <section className="search-form">
       <div className="search-form__wrapper">
-        <div className="search-form__container">
-          <img src={searchIcon} className="search-form__icon" alt="Поиск" />
+        <form
+          className="search-form__container"
+          onSubmit={pageSavedMovies ? handleSearchSavedMovies : handleSearchMovies}
+        >
+          <img
+            src={searchIcon}
+            className="search-form__icon"
+            alt="Поиск"
+          />
           <input
             className="search-form__input"
             type="text"
             placeholder="Фильм"
-            minLength="1"
+            onChange={handleChangeSearchValue}
+            value={searchValue || ''}
             required
           />
+          <span
+            className={`search-form__err
+              ${isSearchValidity ? 'search-form__err_hide' : ''}`}
+          >
+            Нужно ввести ключевое слово
+          </span>
           <button
-            aria-label="Найти"
             className="search-form__search-button"
             type="submit"
-            onClick={handleSubmit}
+            aria-label="Найти"
           />
-        </div>
+        </form>
         <Checkbox
           checkboxOn={checkboxOn}
           handleToggleCheckbox={handleToggleCheckbox}

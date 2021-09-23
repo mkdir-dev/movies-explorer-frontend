@@ -1,3 +1,20 @@
+.movies-card-list__message {
+  max-width: 480px;
+  margin: 35px auto 0;
+  display: flex;
+  justify-content: center;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: rgb(238, 52, 101);
+}
+
+.movies-card-list__hide {
+  display: none;
+}
+
 .movies-card-list__container {
   width: 100%;
   margin: 70px 0 10px;
@@ -36,5 +53,11 @@
   .movies-card-list__container {
     margin: 40px 0 20px;
     align-items: center;
+  }
+  .movies-card-list__message {
+    max-width: 400px;
+    margin: 25px auto 0;
+    font-size: 14px;
+    line-height: 18px;
   }
 }

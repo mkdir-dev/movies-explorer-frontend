@@ -72,7 +72,7 @@
   background-image: url(../../images/delete.png);
 }
 
-.movies-card__image-cantainer {
+.movies-card__image-container {
   display: inline-block;
   overflow: hidden;
 }
@@ -114,8 +114,10 @@
     padding: 14px 12px;
     display: flex;
     flex-direction: row;
-    align-items: start;
     align-self: normal;
+    /*
+    align-items: start;
+    */
   }
   .movies-card__title {
     font-size: 12px;
@@ -124,7 +126,7 @@
   .movies-card__time {
     margin-top: 8px;
   }
-  .movies-card__image-cantainer {
+  .movies-card__image-container {
     display: inline-flex;
   }
   .movies-card__image {

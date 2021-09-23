@@ -25,6 +25,7 @@
 }
 
 .auth-form__form {
+  position: relative;
   margin-top: 40px;
 }
 
@@ -72,6 +73,14 @@
   line-height: 16px;
 }
 
+.auth-form__input:focus {
+  background-color: rgba(47, 47, 47, 0.7);
+}
+
+.auth-form__input_disabled {
+  color: rgba(255, 255, 255, 0.5);
+}
+
 .auth-form__input_type_profile {
   margin: 0 0 0 30px;
   padding: 17px 0 16px;
@@ -88,11 +97,54 @@
 
 .auth-form__input-error {
   position: absolute;
-  top: 78px;
+  /* изменить, т.к. сообщение не влезает */
+  top: 72px;
+  font-style: normal;
+  font-weight: normal;
+  /* изменить, т.к. сообщение не влезает */
+  font-size: 9px;
+  line-height: 12px;
+  color: rgba(238, 52, 101, 1);
+}
+
+.auth-form__input-error_type_profile {
+  position: absolute;
+  /* изменить, т.к. сообщение не влезает */
+  top: 32px;
+  font-style: normal;
+  font-weight: normal;
+  /* изменить, т.к. сообщение не влезает */
+  font-size: 9px;
+  line-height: 12px;
+  color: rgba(238, 52, 101, 1);
+}
+
+.auth-form__api-error {
+  position: absolute;
   font-style: normal;
   font-weight: normal;
   font-size: 10px;
   line-height: 12px;
+  color: rgba(238, 52, 101, 1);
+}
+
+.auth-form__api-sendingData {
+  position: absolute;
+  width: 100%;
+  top: 120px;
+  display: flex;
+  justify-content: center;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.auth-form__api-sendingData_type_success {
+  color: rgba(61, 220, 132, 1);
+}
+
+.auth-form__api-sendingData_type_error {
   color: rgba(238, 52, 101, 1);
 }
 
@@ -161,25 +213,53 @@
   color: rgba(61, 220, 132, 1);
 }
 
-.auth-form__link_edit {
-  margin-top: 204px;
+.auth-form__button-profile {
+  width: max-content;
+  margin: 0 auto;
+  padding: 0;
+  border: none;
   color: rgba(255, 255, 255, 1);
+  background-color: transparent;
+  font-style: normal;
+  font-weight: normal;
   font-size: 13px;
   line-height: 16px;
   text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
 }
 
-.auth-form__link_signout {
+.auth-form__button-profile:hover {
+  transform: scale(1.05);
+}
+
+.auth-form__button-profile_edit {
+  margin-top: 204px;
+}
+
+.auth-form__button-profile_edit:hover {
+  color: rgba(61, 220, 132, 1);
+}
+
+.auth-form__button-profile_edit_disabled {
+  opacity: 0.7;
+  color: rgba(139, 139, 139);
+}
+
+.auth-form__button-profile_edit_disabled:hover {
+  transform: scale(1);
+  cursor: no-drop;
+  opacity: 0.7;
+  color: rgba(139, 139, 139);
+}
+
+.auth-form__button-profile_signout {
   margin-top: 16px;
   color: rgba(238, 52, 101, 1);
   font-weight: 500;
-  font-size: 13px;
-  line-height: 16px;
-  text-align: center;
 }
 
-.auth-form__link_signout:hover {
-  transform: scale(1.05);
+.auth-form__button-profile_signout:hover {
   color: rgba(238, 52, 101, 0.7);
 }
 
@@ -187,7 +267,7 @@
   .auth-form__container {
     padding-top: 232px;
   }
-  .auth-form__link_edit {
+  .auth-form__button-profile_edit {
     margin-top: 194px;
   }
 }
@@ -223,6 +303,10 @@
     line-height: 15px;
   }
   .auth-form__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .auth-form__button-profile {
     font-size: 12px;
     line-height: 15px;
   }

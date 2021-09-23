@@ -1,21 +1,17 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link /* , useHistory */ } from 'react-router-dom';
 
 import './FormAuth.css';
 import Logotype from '../Logotype/Logotype';
 
 export default function FormAuth({
-  onLogin, children, linkHistory, title, buttonText, typeButton, question, link, linkText,
+  children, onSubmit,
+  title, buttonText,
+  typeButton, question,
+  link, linkText,
+  isDisabled, isMessageErrorAPI,
 }) {
-  const history = useHistory();
-
-  function handleSubmit(evt) {
-    onLogin();
-    evt.preventDefault();
-    history.push(`${linkHistory}`);
-  }
-
   return (
     <section className="auth-form">
       <div className="auth-form__container">
@@ -27,15 +23,20 @@ export default function FormAuth({
         </h2>
         <form
           className="auth-form__form"
-          onSubmit={handleSubmit}
+          onSubmit={onSubmit}
         >
 
           {children}
 
+          <span className="auth-form__api-error">{isMessageErrorAPI}</span>
           <button
             aria-label={buttonText}
-            className={`auth-form__button-submit auth-form__button-submit_type_${typeButton}`}
+            className={`
+              auth-form__button-submit auth-form__button-submit_type_${typeButton}
+              ${isDisabled ? 'auth-form__button-submit_disabled' : ''}
+            `}
             type="submit"
+            disabled={isDisabled}
           >
             {buttonText}
           </button>

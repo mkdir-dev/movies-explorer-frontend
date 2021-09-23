@@ -4,6 +4,7 @@
 }
 
 .search-form__wrapper {
+  position: relative;
   padding: 70px 0 80px;
   display: flex;
   flex-direction: row;
@@ -36,6 +37,23 @@
   font-weight: normal;
   font-size: 18px;
   line-height: 20px;
+}
+
+.search-form__err {
+  position: absolute;
+  top: 55px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: rgb(238, 52, 101);
+}
+
+.search-form__err_hide {
+  display: none;
 }
 
 .search-form__search-button {
