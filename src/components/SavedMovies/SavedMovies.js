@@ -15,6 +15,7 @@ export default function Movies({
   savedMovies,
   onSearchSavedMoviesByValue,
   onDeleteMoviesCard,
+  // isOpenPopup,
 }) {
   return (
     <section className="movies">
@@ -34,6 +35,7 @@ export default function Movies({
             pageSavedMovies={true}
             savedMovies={savedMovies}
             onDeleteMoviesCard={onDeleteMoviesCard}
+            // isOpenPopup={isOpenPopup}
           />
         )}
       </div>

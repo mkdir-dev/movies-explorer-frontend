@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 
 import './MoviesCard.css';
 
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
+
 export default function MoviesCard({
   card,
   onSaveMoviesCard,
@@ -11,8 +13,20 @@ export default function MoviesCard({
   pageSavedMovies,
   isLikedMovies,
   savedMovies,
+  // isOpenPopup,
 }) {
   const [isLiked, setIsLiked] = useState(false);
+
+  const [isPopup, setPopup] = useState(false);
+
+  const handleOpenPopup = () => {
+    // console.log(movie);
+    setPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setPopup(false);
+  };
 
   const movie = {
     country: card.country || 'Страна не указана',
@@ -21,7 +35,7 @@ export default function MoviesCard({
     year: card.year || 'Год не указан',
     description: card.description || 'Описание не указано',
     image: `https://api.nomoreparties.co${card.image?.url}`,
-    trailer: card.trailerLink || 'https://youtube.ru',
+    trailer: card?.trailerLink || 'https://youtube.ru',
     nameRU: card.nameRU || 'Название не указано',
     nameEN: card.nameEN || 'Title not specified',
     thumbnail: `https://api.nomoreparties.co${card.image?.url}`,
@@ -65,9 +79,16 @@ export default function MoviesCard({
     <li className="movies-card">
       <div className="movies-card__wrapper">
         <div className="movies-card__info">
-          <h3 className="movies-card__title">
-            {card.nameRU}
-          </h3>
+          <button
+            className="movies-card__button"
+            type="button"
+            aria-label="Информация о фильме"
+            onClick={handleOpenPopup}
+          >
+            <h3 className="movies-card__title">
+              {card.nameRU}
+            </h3>
+          </button>
           <p className="movies-card__time">
             {`${Math.trunc(card.duration / 60)}ч ${card.duration % 60}м`}
           </p>
@@ -106,6 +127,19 @@ export default function MoviesCard({
           />
         </a>
       </div>
+      <InfoTooltip
+        movie={pageSavedMovies ? card : movie}
+        pageSavedMovies={pageSavedMovies}
+        isPopup={isPopup}
+        onClosePopup={handleClosePopup}
+      />
     </li>
   );
 }
+
+/*
+            <InfoTooltip
+            isPopup={isPopup}
+            onClosePopup={handleClosePopup}
+          />
+*/

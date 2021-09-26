@@ -7,7 +7,7 @@ export default function Footer({ footerLocation }) {
   return (
     <footer className={` ${footerLocation ? 'hide-section' : 'footer'} `}>
       <div className="container">
-        <p className="footer__description">Учебный проект Яндекс.Практикум х BeatFilm.</p>
+        <p className="footer__description">Учебный проект х BeatFilm.</p>
         <div className="footer__wrapper">
           <a
             href="https://github.com/mkdir-dev"
@@ -19,16 +19,6 @@ export default function Footer({ footerLocation }) {
           </a>
           <nav className="footer__navigation">
             <ul className="footer__social-links">
-              <li className="footer__links-item">
-                <a
-                  className="footer__link"
-                  href="https://practicum.yandex.ru/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Яндекс.Практикум
-                </a>
-              </li>
               <li className="footer__links-item">
                 <a
                   className="footer__link"
