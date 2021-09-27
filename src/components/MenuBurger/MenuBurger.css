@@ -95,6 +95,10 @@
   color: rgba(0, 0, 0, 1);
 }
 
+.menu-burger__link_type_profile-active {
+  text-decoration: underline;
+}
+
 .menu-burger__item_type_button-close {
   position: fixed;
   top: 0;

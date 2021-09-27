@@ -1,12 +1,13 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable react/prop-types */
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import './MenuBurger.css';
 
 export default function MenuBurger({ activeBurger, setActiveBurger }) {
+  const location = useLocation();
   // убрать меню-бургер при нажатии
   const handleClick = () => {
     setActiveBurger(false);
@@ -16,6 +17,15 @@ export default function MenuBurger({ activeBurger, setActiveBurger }) {
   const handleNotClick = (evt) => {
     evt.stopPropagation();
   };
+
+  console.log(location.pathname);
+
+  /*
+  className={`
+    menu-burger__link
+    ${location.pathname === '/' ? 'menu-burger__link_active' : ''}
+  `}
+  */
 
   return (
     <nav
@@ -28,7 +38,10 @@ export default function MenuBurger({ activeBurger, setActiveBurger }) {
       >
         <li className="menu-burger__item">
           <Link
-            className="menu-burger__link"
+            className={`
+              menu-burger__link
+              ${location.pathname === '/' ? 'menu-burger__link_active' : ''}
+            `}
             to="/"
             onClick={handleClick}
           >
@@ -37,7 +50,10 @@ export default function MenuBurger({ activeBurger, setActiveBurger }) {
         </li>
         <li className="menu-burger__item">
           <Link
-            className="menu-burger__link menu-burger__link_active"
+            className={`
+              menu-burger__link
+              ${location.pathname === '/movies' ? 'menu-burger__link_active' : ''}
+            `}
             to="/movies"
             onClick={handleClick}
           >
@@ -46,7 +62,10 @@ export default function MenuBurger({ activeBurger, setActiveBurger }) {
         </li>
         <li className="menu-burger__item">
           <Link
-            className="menu-burger__link"
+            className={`
+              menu-burger__link
+              ${location.pathname === '/saved-movies' ? 'menu-burger__link_active' : ''}
+            `}
             to="/saved-movies"
             onClick={handleClick}
           >
@@ -55,7 +74,10 @@ export default function MenuBurger({ activeBurger, setActiveBurger }) {
         </li>
         <li className="menu-burger__item_type_profile">
           <Link
-            className="menu-burger__link_type_profile"
+            className={`
+            menu-burger__link_type_profile
+              ${location.pathname === '/profile' ? 'menu-burger__link_type_profile-active' : ''}
+            `}
             to="/profile"
             onClick={handleClick}
           >

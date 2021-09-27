@@ -18,6 +18,7 @@ export default function Movies({
   isErrorServer,
   onSaveMoviesCard,
   onDeleteMoviesCard,
+  // isOpenPopup,
 }) {
   // console.log(savedMovies);
   const likedMovies = savedMovies.map((movie) => movie.movieId);
@@ -42,6 +43,7 @@ export default function Movies({
             onDeleteMoviesCard={onDeleteMoviesCard}
             pageSavedMovies={false}
             isLikedMovies={likedMovies}
+            // isOpenPopup={isOpenPopup}
           />
         )}
       </div>

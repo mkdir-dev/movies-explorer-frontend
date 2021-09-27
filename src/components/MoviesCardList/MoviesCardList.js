@@ -14,6 +14,7 @@ export default function MoviesCardList({
   isErrorServer,
   pageSavedMovies,
   isLikedMovies,
+  // isOpenPopup,
 }) {
   const windowWidth = window.innerWidth;
   const [isDisplayWidth, setDisplayWidth] = useState(windowWidth);
@@ -74,6 +75,7 @@ export default function MoviesCardList({
             pageSavedMovies={pageSavedMovies}
             savedMovies={savedMovies}
             isLikedMovies={isLikedMovies?.includes(card.id)}
+          // isOpenPopup={isOpenPopup}
           />
         ))}
       </ul>

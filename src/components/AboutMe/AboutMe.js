@@ -61,16 +61,6 @@ export default function AboutMe() {
                   Telegram
                 </a>
               </li>
-              <li className="about-me__links-item">
-                <a
-                  className="about-me__link"
-                  href="https://www.facebook.com/mkdir.developer/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Facebook
-                </a>
-              </li>
             </ul>
           </article>
           <img src={photo} alt="Фото" className="about-me__photo" />

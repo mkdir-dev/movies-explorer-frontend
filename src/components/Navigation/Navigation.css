@@ -8,11 +8,7 @@
 .navigation__item:first-child {
   margin-right: 50px;
 }
-/*
-.navigation__item:last-child {
-  margin-right: 0px;
-}
-*/
+
 .navigation__link {
   font-style: normal;
   font-weight: 500;
@@ -75,6 +71,7 @@
 }
 
 .navigation__link_active {
+  color: rgba(61, 220, 132, 1);
   font-weight: 500;
 }
 
@@ -97,6 +94,10 @@
 
 .navigation__link_type_profile:active {
   color: rgba(0, 0, 0, 1);
+}
+
+.navigation__link_type_profile-active {
+  text-decoration: underline;
 }
 
 .navigation__button-burger {

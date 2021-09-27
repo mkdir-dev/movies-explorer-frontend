@@ -20,6 +20,7 @@ import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 import NotFound from '../NotFound/NotFound';
 import Footer from '../Footer/Footer';
+// import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
 import * as MainApi from '../../utils/MainApi';
 import * as MoviesApi from '../../utils/MoviesApi';
@@ -59,6 +60,19 @@ export default function App() {
   const [messageSendingData, setMessageSendingData] = useState('');
   // стейт активнивного/неактивного инпута
   const [isDisabledInput, setDisabledInput] = useState(false);
+  /*
+  // стейты открытия/закрытия popup
+  const [isPopup, setPopup] = useState(false);
+
+  const handleOpenPopup = (movie) => {
+    console.log(movie);
+    setPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setPopup(false);
+  };
+  */
 
   const checkToken = () => {
     const token = localStorage.getItem('token');
@@ -434,6 +448,7 @@ export default function App() {
               isErrorServer={isErrorServer}
               onSaveMoviesCard={handleSaveMoviesCard}
               onDeleteMoviesCard={handleDeleteMoviesCard}
+              // isOpenPopup={handleOpenPopup}
             />
 
             <ProtectedRoute
@@ -448,6 +463,7 @@ export default function App() {
               onSearchSavedMoviesByValue={handleSearchSavedMovies}
               deleteMoviesCard={isDeleteMoviesCard}
               onDeleteMoviesCard={handleDeleteMoviesCard}
+              // isOpenPopup={handleOpenPopup}
             />
 
             <Route path="*">
@@ -459,7 +475,16 @@ export default function App() {
         <Footer
           footerLocation={footerLocation}
         />
+
       </div>
     </CurrentUserContext.Provider>
   );
 }
+
+/*
+        <InfoTooltip
+          // movie
+          isPopup={isPopup}
+          onClosePopup={handleClosePopup}
+        />
+*/
