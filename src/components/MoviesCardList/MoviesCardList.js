@@ -32,8 +32,6 @@ export default function MoviesCardList({
 
     window.addEventListener('resize', callbackWidth);
 
-    console.log(windowWidth);
-
     if (windowWidth <= 640) {
       setMoviesCount(5);
       setAddMoviesCount(5);
@@ -77,7 +75,7 @@ export default function MoviesCardList({
             pageSavedMovies={pageSavedMovies}
             savedMovies={savedMovies}
             isLikedMovies={isLikedMovies?.includes(card.id)}
-            // isOpenPopup={isOpenPopup}
+          // isOpenPopup={isOpenPopup}
           />
         ))}
       </ul>
