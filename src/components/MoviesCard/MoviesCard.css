@@ -121,7 +121,7 @@
 
 @media (max-width: 640px) {
   .movies-card {
-    /* width: max-content; */
+    width: max-content;
     max-width: 300px;
     margin-bottom: 20px;
     padding: 0px;
