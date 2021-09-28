@@ -341,6 +341,7 @@ export default function App() {
     // считать пользователя залогиненным
     if (token) {
       setLoggedIn(true);
+      history.push(location.pathname);
     }
 
     if (loggedIn) {
@@ -448,7 +449,7 @@ export default function App() {
               isErrorServer={isErrorServer}
               onSaveMoviesCard={handleSaveMoviesCard}
               onDeleteMoviesCard={handleDeleteMoviesCard}
-              // isOpenPopup={handleOpenPopup}
+            // isOpenPopup={handleOpenPopup}
             />
 
             <ProtectedRoute
@@ -463,7 +464,7 @@ export default function App() {
               onSearchSavedMoviesByValue={handleSearchSavedMovies}
               deleteMoviesCard={isDeleteMoviesCard}
               onDeleteMoviesCard={handleDeleteMoviesCard}
-              // isOpenPopup={handleOpenPopup}
+            // isOpenPopup={handleOpenPopup}
             />
 
             <Route path="*">

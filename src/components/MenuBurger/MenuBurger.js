@@ -18,15 +18,6 @@ export default function MenuBurger({ activeBurger, setActiveBurger }) {
     evt.stopPropagation();
   };
 
-  console.log(location.pathname);
-
-  /*
-  className={`
-    menu-burger__link
-    ${location.pathname === '/' ? 'menu-burger__link_active' : ''}
-  `}
-  */
-
   return (
     <nav
       className={activeBurger ? 'menu-burger_active' : 'menu-burger'}

@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable react/prop-types */
 import React from 'react';
 
@@ -20,7 +21,6 @@ export default function Movies({
   onDeleteMoviesCard,
   // isOpenPopup,
 }) {
-  // console.log(savedMovies);
   const likedMovies = savedMovies.map((movie) => movie.movieId);
   return (
     <section className="movies">
